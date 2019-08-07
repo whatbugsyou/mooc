@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+					http://www.springframework.org/schema/beans/spring-beans.xsd
+					http://www.springframework.org/schema/context
+					http://www.springframework.org/schema/context/spring-context.xsd
+					http://www.springframework.org/schema/aop
+					http://www.springframework.org/schema/aop/spring-aop.xsd
+					http://www.springframework.org/schema/tx 
+					http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+	<!--读取外部properties配置文件 -->
+	<context:property-placeholder
+		location="classpath:mybatis.properties" />
+	<!-- 配置连接池 datasource -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="url" value="${url}"></property>
+		<property name="driverClassName" value="${driver}"></property>
+		<property name="username" value="${username}"></property>
+		<property name="password" value="${password}"></property>
+	</bean>
+	
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="typeAliasesPackage" value="com.mooc.entity"></property>
+	 	<property name="mapperLocation" value="classpath:com.mooc.dao"></property>
+	</bean>
+	
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="sqlSessionFactoryBeanName"
+			value="sqlSessionFactory"></property>
+		<property name="basePackage" value="com.mooc.dao"></property>
+	</bean>
+	<!--创建事务平台管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	 <tx:annotation-driven transaction-manager="transactionManager" />
+</beans>
