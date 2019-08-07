@@ -1,31 +1,31 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mooc.dao.VideoMapper" >
-  <resultMap id="BaseResultMap" type="com.mooc.entity.Video" >
-    <id column="vid" property="vid" jdbcType="INTEGER" />
-    <result column="vname" property="vname" jdbcType="VARCHAR" />
-    <result column="vepisode" property="vepisode" jdbcType="VARCHAR" />
-    <result column="vaddress" property="vaddress" jdbcType="VARCHAR" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mooc.dao.VideoMapper">
+  <resultMap id="BaseResultMap" type="com.mooc.entity.Video">
+    <id column="vid" jdbcType="INTEGER" property="vid" />
+    <result column="vname" jdbcType="VARCHAR" property="vname" />
+    <result column="vepisode" jdbcType="VARCHAR" property="vepisode" />
+    <result column="vaddress" jdbcType="VARCHAR" property="vaddress" />
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -36,25 +36,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -65,128 +65,512 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     vid, vname, vepisode, vaddress
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mooc.entity.VideoExample" >
+  <select id="selectByExample" parameterType="com.mooc.entity.VideoExample" resultMap="BaseResultMap">
     select
-    <if test="distinct" >
+    <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
     from video
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null" >
+    <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from video
     where vid = #{vid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from video
     where vid = #{vid,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.mooc.entity.VideoExample" >
+  <delete id="deleteByExample" parameterType="com.mooc.entity.VideoExample">
     delete from video
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.mooc.entity.Video" >
+  <insert id="insert" parameterType="com.mooc.entity.Video">
     insert into video (vid, vname, vepisode, 
       vaddress)
     values (#{vid,jdbcType=INTEGER}, #{vname,jdbcType=VARCHAR}, #{vepisode,jdbcType=VARCHAR}, 
       #{vaddress,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.mooc.entity.Video" >
+  <insert id="insertSelective" parameterType="com.mooc.entity.Video">
     insert into video
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="vid != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="vid != null">
         vid,
       </if>
-      <if test="vname != null" >
+      <if test="vname != null">
         vname,
       </if>
-      <if test="vepisode != null" >
+      <if test="vepisode != null">
         vepisode,
       </if>
-      <if test="vaddress != null" >
+      <if test="vaddress != null">
         vaddress,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="vid != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="vid != null">
         #{vid,jdbcType=INTEGER},
       </if>
-      <if test="vname != null" >
+      <if test="vname != null">
         #{vname,jdbcType=VARCHAR},
       </if>
-      <if test="vepisode != null" >
+      <if test="vepisode != null">
         #{vepisode,jdbcType=VARCHAR},
       </if>
-      <if test="vaddress != null" >
+      <if test="vaddress != null">
         #{vaddress,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.mooc.entity.VideoExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.mooc.entity.VideoExample" resultType="java.lang.Integer">
     select count(*) from video
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+  <update id="updateByExampleSelective" parameterType="map">
     update video
-    <set >
-      <if test="record.vid != null" >
+    <set>
+      <if test="record.vid != null">
         vid = #{record.vid,jdbcType=INTEGER},
       </if>
-      <if test="record.vname != null" >
+      <if test="record.vname != null">
         vname = #{record.vname,jdbcType=VARCHAR},
       </if>
-      <if test="record.vepisode != null" >
+      <if test="record.vepisode != null">
         vepisode = #{record.vepisode,jdbcType=VARCHAR},
       </if>
-      <if test="record.vaddress != null" >
+      <if test="record.vaddress != null">
         vaddress = #{record.vaddress,jdbcType=VARCHAR},
       </if>
     </set>
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map" >
+  <update id="updateByExample" parameterType="map">
     update video
     set vid = #{record.vid,jdbcType=INTEGER},
       vname = #{record.vname,jdbcType=VARCHAR},
       vepisode = #{record.vepisode,jdbcType=VARCHAR},
       vaddress = #{record.vaddress,jdbcType=VARCHAR}
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.mooc.entity.Video" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.mooc.entity.Video">
     update video
-    <set >
-      <if test="vname != null" >
+    <set>
+      <if test="vname != null">
         vname = #{vname,jdbcType=VARCHAR},
       </if>
-      <if test="vepisode != null" >
+      <if test="vepisode != null">
         vepisode = #{vepisode,jdbcType=VARCHAR},
       </if>
-      <if test="vaddress != null" >
+      <if test="vaddress != null">
         vaddress = #{vaddress,jdbcType=VARCHAR},
       </if>
     </set>
     where vid = #{vid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.mooc.entity.Video" >
+  <update id="updateByPrimaryKey" parameterType="com.mooc.entity.Video">
+    update video
+    set vname = #{vname,jdbcType=VARCHAR},
+      vepisode = #{vepisode,jdbcType=VARCHAR},
+      vaddress = #{vaddress,jdbcType=VARCHAR}
+    where vid = #{vid,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.mooc.entity.Video">
+    <id column="vid" jdbcType="INTEGER" property="vid" />
+    <result column="vname" jdbcType="VARCHAR" property="vname" />
+    <result column="vepisode" jdbcType="VARCHAR" property="vepisode" />
+    <result column="vaddress" jdbcType="VARCHAR" property="vaddress" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    vid, vname, vepisode, vaddress
+  </sql>
+  <select id="selectByExample" parameterType="com.mooc.entity.VideoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from video
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from video
+    where vid = #{vid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from video
+    where vid = #{vid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mooc.entity.VideoExample">
+    delete from video
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mooc.entity.Video">
+    insert into video (vid, vname, vepisode, 
+      vaddress)
+    values (#{vid,jdbcType=INTEGER}, #{vname,jdbcType=VARCHAR}, #{vepisode,jdbcType=VARCHAR}, 
+      #{vaddress,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mooc.entity.Video">
+    insert into video
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="vid != null">
+        vid,
+      </if>
+      <if test="vname != null">
+        vname,
+      </if>
+      <if test="vepisode != null">
+        vepisode,
+      </if>
+      <if test="vaddress != null">
+        vaddress,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="vid != null">
+        #{vid,jdbcType=INTEGER},
+      </if>
+      <if test="vname != null">
+        #{vname,jdbcType=VARCHAR},
+      </if>
+      <if test="vepisode != null">
+        #{vepisode,jdbcType=VARCHAR},
+      </if>
+      <if test="vaddress != null">
+        #{vaddress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mooc.entity.VideoExample" resultType="java.lang.Integer">
+    select count(*) from video
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update video
+    <set>
+      <if test="record.vid != null">
+        vid = #{record.vid,jdbcType=INTEGER},
+      </if>
+      <if test="record.vname != null">
+        vname = #{record.vname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vepisode != null">
+        vepisode = #{record.vepisode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vaddress != null">
+        vaddress = #{record.vaddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update video
+    set vid = #{record.vid,jdbcType=INTEGER},
+      vname = #{record.vname,jdbcType=VARCHAR},
+      vepisode = #{record.vepisode,jdbcType=VARCHAR},
+      vaddress = #{record.vaddress,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mooc.entity.Video">
+    update video
+    <set>
+      <if test="vname != null">
+        vname = #{vname,jdbcType=VARCHAR},
+      </if>
+      <if test="vepisode != null">
+        vepisode = #{vepisode,jdbcType=VARCHAR},
+      </if>
+      <if test="vaddress != null">
+        vaddress = #{vaddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where vid = #{vid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mooc.entity.Video">
+    update video
+    set vname = #{vname,jdbcType=VARCHAR},
+      vepisode = #{vepisode,jdbcType=VARCHAR},
+      vaddress = #{vaddress,jdbcType=VARCHAR}
+    where vid = #{vid,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.mooc.entity.Video">
+    <id column="vid" jdbcType="INTEGER" property="vid" />
+    <result column="vname" jdbcType="VARCHAR" property="vname" />
+    <result column="vepisode" jdbcType="VARCHAR" property="vepisode" />
+    <result column="vaddress" jdbcType="VARCHAR" property="vaddress" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    vid, vname, vepisode, vaddress
+  </sql>
+  <select id="selectByExample" parameterType="com.mooc.entity.VideoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from video
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from video
+    where vid = #{vid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from video
+    where vid = #{vid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mooc.entity.VideoExample">
+    delete from video
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mooc.entity.Video">
+    insert into video (vid, vname, vepisode, 
+      vaddress)
+    values (#{vid,jdbcType=INTEGER}, #{vname,jdbcType=VARCHAR}, #{vepisode,jdbcType=VARCHAR}, 
+      #{vaddress,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mooc.entity.Video">
+    insert into video
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="vid != null">
+        vid,
+      </if>
+      <if test="vname != null">
+        vname,
+      </if>
+      <if test="vepisode != null">
+        vepisode,
+      </if>
+      <if test="vaddress != null">
+        vaddress,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="vid != null">
+        #{vid,jdbcType=INTEGER},
+      </if>
+      <if test="vname != null">
+        #{vname,jdbcType=VARCHAR},
+      </if>
+      <if test="vepisode != null">
+        #{vepisode,jdbcType=VARCHAR},
+      </if>
+      <if test="vaddress != null">
+        #{vaddress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mooc.entity.VideoExample" resultType="java.lang.Integer">
+    select count(*) from video
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update video
+    <set>
+      <if test="record.vid != null">
+        vid = #{record.vid,jdbcType=INTEGER},
+      </if>
+      <if test="record.vname != null">
+        vname = #{record.vname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vepisode != null">
+        vepisode = #{record.vepisode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vaddress != null">
+        vaddress = #{record.vaddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update video
+    set vid = #{record.vid,jdbcType=INTEGER},
+      vname = #{record.vname,jdbcType=VARCHAR},
+      vepisode = #{record.vepisode,jdbcType=VARCHAR},
+      vaddress = #{record.vaddress,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mooc.entity.Video">
+    update video
+    <set>
+      <if test="vname != null">
+        vname = #{vname,jdbcType=VARCHAR},
+      </if>
+      <if test="vepisode != null">
+        vepisode = #{vepisode,jdbcType=VARCHAR},
+      </if>
+      <if test="vaddress != null">
+        vaddress = #{vaddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where vid = #{vid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mooc.entity.Video">
     update video
     set vname = #{vname,jdbcType=VARCHAR},
       vepisode = #{vepisode,jdbcType=VARCHAR},

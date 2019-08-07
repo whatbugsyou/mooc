@@ -1,29 +1,29 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mooc.dao.CoursetypeMapper" >
-  <resultMap id="BaseResultMap" type="com.mooc.entity.Coursetype" >
-    <id column="ctid" property="ctid" jdbcType="INTEGER" />
-    <result column="ctname" property="ctname" jdbcType="VARCHAR" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mooc.dao.CoursetypeMapper">
+  <resultMap id="BaseResultMap" type="com.mooc.entity.Coursetype">
+    <id column="ctid" jdbcType="INTEGER" property="ctid" />
+    <result column="ctname" jdbcType="VARCHAR" property="ctname" />
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -34,25 +34,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -63,100 +63,420 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     ctid, ctname
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mooc.entity.CoursetypeExample" >
+  <select id="selectByExample" parameterType="com.mooc.entity.CoursetypeExample" resultMap="BaseResultMap">
     select
-    <if test="distinct" >
+    <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
     from courseType
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null" >
+    <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from courseType
     where ctid = #{ctid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from courseType
     where ctid = #{ctid,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.mooc.entity.CoursetypeExample" >
+  <delete id="deleteByExample" parameterType="com.mooc.entity.CoursetypeExample">
     delete from courseType
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.mooc.entity.Coursetype" >
+  <insert id="insert" parameterType="com.mooc.entity.Coursetype">
     insert into courseType (ctid, ctname)
     values (#{ctid,jdbcType=INTEGER}, #{ctname,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.mooc.entity.Coursetype" >
+  <insert id="insertSelective" parameterType="com.mooc.entity.Coursetype">
     insert into courseType
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="ctid != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ctid != null">
         ctid,
       </if>
-      <if test="ctname != null" >
+      <if test="ctname != null">
         ctname,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="ctid != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ctid != null">
         #{ctid,jdbcType=INTEGER},
       </if>
-      <if test="ctname != null" >
+      <if test="ctname != null">
         #{ctname,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.mooc.entity.CoursetypeExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.mooc.entity.CoursetypeExample" resultType="java.lang.Integer">
     select count(*) from courseType
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+  <update id="updateByExampleSelective" parameterType="map">
     update courseType
-    <set >
-      <if test="record.ctid != null" >
+    <set>
+      <if test="record.ctid != null">
         ctid = #{record.ctid,jdbcType=INTEGER},
       </if>
-      <if test="record.ctname != null" >
+      <if test="record.ctname != null">
         ctname = #{record.ctname,jdbcType=VARCHAR},
       </if>
     </set>
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map" >
+  <update id="updateByExample" parameterType="map">
     update courseType
     set ctid = #{record.ctid,jdbcType=INTEGER},
       ctname = #{record.ctname,jdbcType=VARCHAR}
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.mooc.entity.Coursetype" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.mooc.entity.Coursetype">
     update courseType
-    <set >
-      <if test="ctname != null" >
+    <set>
+      <if test="ctname != null">
         ctname = #{ctname,jdbcType=VARCHAR},
       </if>
     </set>
     where ctid = #{ctid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.mooc.entity.Coursetype" >
+  <update id="updateByPrimaryKey" parameterType="com.mooc.entity.Coursetype">
+    update courseType
+    set ctname = #{ctname,jdbcType=VARCHAR}
+    where ctid = #{ctid,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.mooc.entity.Coursetype">
+    <id column="ctid" jdbcType="INTEGER" property="ctid" />
+    <result column="ctname" jdbcType="VARCHAR" property="ctname" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ctid, ctname
+  </sql>
+  <select id="selectByExample" parameterType="com.mooc.entity.CoursetypeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from courseType
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from courseType
+    where ctid = #{ctid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from courseType
+    where ctid = #{ctid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mooc.entity.CoursetypeExample">
+    delete from courseType
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mooc.entity.Coursetype">
+    insert into courseType (ctid, ctname)
+    values (#{ctid,jdbcType=INTEGER}, #{ctname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mooc.entity.Coursetype">
+    insert into courseType
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ctid != null">
+        ctid,
+      </if>
+      <if test="ctname != null">
+        ctname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ctid != null">
+        #{ctid,jdbcType=INTEGER},
+      </if>
+      <if test="ctname != null">
+        #{ctname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mooc.entity.CoursetypeExample" resultType="java.lang.Integer">
+    select count(*) from courseType
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update courseType
+    <set>
+      <if test="record.ctid != null">
+        ctid = #{record.ctid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ctname != null">
+        ctname = #{record.ctname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update courseType
+    set ctid = #{record.ctid,jdbcType=INTEGER},
+      ctname = #{record.ctname,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mooc.entity.Coursetype">
+    update courseType
+    <set>
+      <if test="ctname != null">
+        ctname = #{ctname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ctid = #{ctid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mooc.entity.Coursetype">
+    update courseType
+    set ctname = #{ctname,jdbcType=VARCHAR}
+    where ctid = #{ctid,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.mooc.entity.Coursetype">
+    <id column="ctid" jdbcType="INTEGER" property="ctid" />
+    <result column="ctname" jdbcType="VARCHAR" property="ctname" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ctid, ctname
+  </sql>
+  <select id="selectByExample" parameterType="com.mooc.entity.CoursetypeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from courseType
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from courseType
+    where ctid = #{ctid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from courseType
+    where ctid = #{ctid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mooc.entity.CoursetypeExample">
+    delete from courseType
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mooc.entity.Coursetype">
+    insert into courseType (ctid, ctname)
+    values (#{ctid,jdbcType=INTEGER}, #{ctname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mooc.entity.Coursetype">
+    insert into courseType
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ctid != null">
+        ctid,
+      </if>
+      <if test="ctname != null">
+        ctname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ctid != null">
+        #{ctid,jdbcType=INTEGER},
+      </if>
+      <if test="ctname != null">
+        #{ctname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mooc.entity.CoursetypeExample" resultType="java.lang.Integer">
+    select count(*) from courseType
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update courseType
+    <set>
+      <if test="record.ctid != null">
+        ctid = #{record.ctid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ctname != null">
+        ctname = #{record.ctname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update courseType
+    set ctid = #{record.ctid,jdbcType=INTEGER},
+      ctname = #{record.ctname,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mooc.entity.Coursetype">
+    update courseType
+    <set>
+      <if test="ctname != null">
+        ctname = #{ctname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ctid = #{ctid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mooc.entity.Coursetype">
     update courseType
     set ctname = #{ctname,jdbcType=VARCHAR}
     where ctid = #{ctid,jdbcType=INTEGER}
