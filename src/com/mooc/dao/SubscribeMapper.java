@@ -4,7 +4,8 @@ import com.mooc.entity.Subscribe;
 import com.mooc.entity.SubscribeExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-
+import org.springframework.stereotype.Repository;
+@Repository
 public interface SubscribeMapper {
     int countByExample(SubscribeExample example);
 

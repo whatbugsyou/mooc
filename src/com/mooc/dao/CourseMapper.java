@@ -4,7 +4,8 @@ import com.mooc.entity.Course;
 import com.mooc.entity.CourseExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-
+import org.springframework.stereotype.Repository;
+@Repository
 public interface CourseMapper {
     int countByExample(CourseExample example);
 
