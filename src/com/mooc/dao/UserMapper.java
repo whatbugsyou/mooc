@@ -1,23 +1,41 @@
 package com.mooc.dao;
 
-import com.mooc.entity.User;
-import com.mooc.entity.UserExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
+
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
+
+import com.mooc.entity.User;
+
 @Repository
 public interface UserMapper {
-    int countByExample(UserExample example);
-
-    int deleteByExample(UserExample example);
-
-    int insert(User record);
-
-    int insertSelective(User record);
-
-    List<User> selectByExample(UserExample example);
-
-    int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
-
-    int updateByExample(@Param("record") User record, @Param("example") UserExample example);
+	@Options(useGeneratedKeys=true,keyProperty = "uid", keyColumn = "uid")
+	@Insert("insert into user(account,password,portrait,signature) values(#{account},#{password},#{portrait},#{signature})")
+	public int insertUser(User user);
+	
+	@Delete("delete from user where uid=#{uid}")
+	public int deleteUserByUid(int uid);
+	
+	@Delete("<script> delete from user where uid in <foreach collection='array' open='(' close=')' separator=',' item='uid' > #{uid} </foreach> </script> ")
+	public int deleteUserByIdList(int[] uidList);
+	
+	@Update("update user set account=#{user.account} password=#{user.password} signature=#{user.signature} portrait=#{user.portrait}")
+	public int updateUser(User user);
+	
+	
+	@Select("select * from user")
+	public List<User> selectAlluser();
+	
+	@Select("select * from user where uid=#{uid}")
+	public User selectUserByUid(int uid);
+	
+	@Select("select * from user where account=#{account}")
+	public User selectUserByaccount(String account);
+	
+	@Select("select count(*) from user")
+	public int selectUserCount();
 }
