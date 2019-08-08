@@ -30,13 +30,13 @@
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="typeAliasesPackage" value="com.mooc.entity"></property>
-	 	<property name="mapperLocation" value="classpath:com.mooc.dao"></property>
+	 	<property name="mapperLocations" value="classpath:com.mooc.dao.*"></property>
 	</bean>
 	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="sqlSessionFactoryBeanName"
 			value="sqlSessionFactory"></property>
-		<property name="basePackage" value="com.mooc.dao"></property>
+		<property name="basePackage" value="classpath:com.mooc.dao"></property>
 	</bean>
 	<!--创建事务平台管理器 -->
 	<bean id="transactionManager"
