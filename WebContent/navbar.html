@@ -42,7 +42,7 @@
                 <a class="nav-link" href="#">购物车</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">登陆</a>
+                <a class="nav-link" href="#" onclick="click_login()">登陆</a>
             </li>
             <li class="nav-item mt-lg-2" style="color:rgb(229, 232, 235)">
                 <span>/</span>
@@ -54,3 +54,68 @@
 
     </div>
 </nav>
+<div class="row mt-sm-5">
+    <div class="col-sm-12 offset-sm-4">
+        <div id="login" :style="style">
+            <form method="POST" action="" class="form-horizontal">
+                <div class="form-group">
+                    <label for="account" class="col-sm-2 control-label">账号</label>
+                    <div class="col-sm-4">
+                        <input type="text" v-model="user.account" class="form-control" id="account" name="account"
+                            placeholder="Account">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-sm-2 control-label">密码:</label>
+                    <div class="col-sm-4">
+                        <input type="password" v-model="user.password" class="form-control" id="password" name="password"
+                            placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-4">
+                        <button type="submit" @click.prevent="login" class="btn btn-success">登陆</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+    var login_vm = new Vue({
+        el: '#login',
+        data: {
+            style: {
+                display: 'none'
+            },
+            user: {
+                uid: 0,
+                account: '',
+                password: '',
+                portrait: '',
+                signature: ''
+            }
+        },
+        methods: {
+            login: function () {
+                $.ajax({
+                    type: "post",
+                    url: "login.do",
+                    data: JSON.stringify(this.user),
+                    contentType:"application/json;charset=UTF-8",
+                    success: function (response) {
+                        if (response == "ok") {
+                            console.log("登陆成功");
+                        }
+                    }
+                });
+            }
+        }
+    })
+    function click_login() {
+        login_vm.style.display = 'block';
+    }
+</script>

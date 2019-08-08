@@ -34,7 +34,7 @@ public interface UserMapper {
 	public User selectUserByUid(int uid);
 	
 	@Select("select * from user where account=#{account}")
-	public User selectUserByaccount(String account);
+	public User selectUserByAccount(String account);
 	
 	@Select("select count(*) from user")
 	public int selectUserCount();
