@@ -30,7 +30,8 @@
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="typeAliasesPackage" value="com.mooc.entity"></property>
-	 	<property name="mapperLocation" value="classpath:com.mooc.dao"></property>
+		<!-- 加载sql配置文件:当配置文件和接口在同一个包下面并且名字一样，可以省略 -->
+	 	<!-- <property name="mapperLocations" value="classpath:com/mooc/dao/*.xml"></property> -->
 	</bean>
 	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
