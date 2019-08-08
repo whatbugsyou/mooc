@@ -1,112 +1,139 @@
-	<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>video control</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="css/myplay.css">
     <link rel="stylesheet" href="css/roll.css">
     <script src="js/jquery.min.js"  type="text/javascript"></script>
-    <script src="js/scrollbar.js" type="text/javascript"></script>
+	<script src="js/scrollbar.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+	<link rel="stylesheet" href="css/navbar.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.js"></script>
 
 </head>
 <body>
+<div class="main">
+	 <div id="head-nav"></div>
+	<br>
+	<figure>
+		<!--课程名-->
+		<figcaption>视频播放</figcaption>
+		<!--播放器主题布局-->
+		<div class="player">
+			<!--左侧播放器-->
+			<div class="player-box">
+				<!--使用的vedio标签 src是路径-->
+				<video id="myVideo" src="vedio/test1.mp4" preload="auto" autobuffer></video>
+				<div class="controls">
+					<!--这是控件。如果无法显示，可以试试chrome浏览器或者部署在服务器上-->
+					<!--上一集下一集还没做好，没有功能-->
+					<a href="javascript:#" class="up fa fa-backward"></a>
+					<a href="javascript:#" class="switch fa fa-play"></a>
+					<a href="javascript:#" class="dwon fa fa-forward"></a>
+					<a href="javascript:#" class="expend fa fa-arrows-alt"></a>
+				<div class="progress">
+					<div class="line"></div>
+					<div class="bar"></div>
+				</div>
+				<div class="times">
+					<span class="current">00:00:00</span>/
+					<span class="totalTime">00:00:00</span>
+				</div>
+				</div>
+			</div>
+			<!--右侧课程章节，也就是视频分集-->
+			<div class="player-menu">
+				<h3>章节</h3>
+					<!--添加了滚动条-->
+					<div class="scroll_wrap">
+						<div class="scroll_cont">     
+							<!--单个视频-->                           
+							<div class="menu-selection">
+								<a href="#"> 
+									<img src="img/test1.jpg">
+									<div class="vedio-name">这里填视频名至于填什么我也不知道</div>
+									<div class="vedio-episode">第x集</div>
+								</a>                          
+							</div>
+							<div class="menu-selection">
+								<a href="#"> 
+									<img src="img/test1.jpg">
+									<div class="vedio-name">这里填视频名至于填什么我也不知道</div>
+									<div class="vedio-episode">第x集</div>
+								</a>                          
+							</div>
+							<div class="menu-selection">
+								<a href="#"> 
+									<img src="img/test1.jpg">
+									<div class="vedio-name">这里填视频名至于填什么我也不知道</div>
+									<div class="vedio-episode">第x集</div>
+								</a>                          
+							</div>
+							<div class="menu-selection">
+								<a href="#"> 
+									<img src="img/test1.jpg">
+									<div class="vedio-name">这里填视频名至于填什么我也不知道</div>
+									<div class="vedio-episode">第x集</div>
+								</a>                          
+							</div>   
+							<div class="menu-selection">
+								<a href="#"> 
+									<img src="img/test1.jpg">
+									<div class="vedio-name">这里填视频名至于填什么我也不知道</div>
+									<div class="vedio-episode">第x集</div>
+								</a>                          
+							</div>
+							<div class="menu-selection">
+								<a href="#"> 
+									<img src="img/test1.jpg">
+									<div class="vedio-name">这里填视频名至于填什么我也不知道</div>
+									<div class="vedio-episode">第x集</div>
+								</a>                          
+							</div>
+						</div>
+				
+						<div class="scroll_bar">
+							<div class="scroll_slider"></div>
+						</div>
+					</div> 
+			
+			</div>
 
-<figure>
-    <!--课程名-->
-    <figcaption>视频播放</figcaption>
-    <!--播放器主题布局-->
-	<div class="player">
-        <!--左侧播放器-->
-        <div class="player-box">
-            <!--使用的vedio标签 src是路径-->
-            <video id="myVideo" src="vedio/test1.mp4" preload="auto" autobuffer></video>
-            <div class="controls">
-                <!--这是控件。如果无法显示，可以试试chrome浏览器或者部署在服务器上-->
-                <!--上一集下一集还没做好，没有功能-->
-                <a href="javascript:#" class="up fa fa-backward"></a>
-                <a href="javascript:#" class="switch fa fa-play"></a>
-                <a href="javascript:#" class="dwon fa fa-forward"></a>
-                <a href="javascript:#" class="expend fa fa-arrows-alt"></a>
-            <div class="progress">
-                <div class="line"></div>
-                <div class="bar"></div>
-            </div>
-            <div class="times">
-                <span class="current">00:00:00</span>/
-                <span class="totalTime">00:00:00</span>
-            </div>
-            </div>
-        </div>
-        <!--右侧课程章节，也就是视频分集-->
-        <div class="player-menu">
-            <h3>章节</h3>
-                <!--添加了滚动条-->
-                <div class="scroll_wrap">
-                    <div class="scroll_cont">     
-                        <!--单个视频-->                           
-                        <div class="menu-selection">
-                            <a href="#"> 
-                                <img src="img/test1.jpg">
-                                <div class="vedio-name">这里填视频名至于填什么我也不知道</div>
-                                <div class="vedio-episode">第x集</div>
-                            </a>                          
-                        </div>
-                        <div class="menu-selection">
-                            <a href="#"> 
-                                <img src="img/test1.jpg">
-                                <div class="vedio-name">这里填视频名至于填什么我也不知道</div>
-                                <div class="vedio-episode">第x集</div>
-                            </a>                          
-                        </div>
-                        <div class="menu-selection">
-                            <a href="#"> 
-                                <img src="img/test1.jpg">
-                                <div class="vedio-name">这里填视频名至于填什么我也不知道</div>
-                                <div class="vedio-episode">第x集</div>
-                            </a>                          
-                        </div>
-                        <div class="menu-selection">
-                            <a href="#"> 
-                                <img src="img/test1.jpg">
-                                <div class="vedio-name">这里填视频名至于填什么我也不知道</div>
-                                <div class="vedio-episode">第x集</div>
-                            </a>                          
-                        </div>   
-                        <div class="menu-selection">
-                            <a href="#"> 
-                                <img src="img/test1.jpg">
-                                <div class="vedio-name">这里填视频名至于填什么我也不知道</div>
-                                <div class="vedio-episode">第x集</div>
-                            </a>                          
-                        </div>
-                        <div class="menu-selection">
-                            <a href="#"> 
-                                <img src="img/test1.jpg">
-                                <div class="vedio-name">这里填视频名至于填什么我也不知道</div>
-                                <div class="vedio-episode">第x集</div>
-                            </a>                          
-                        </div>
-                    </div>
-            
-                    <div class="scroll_bar">
-                        <div class="scroll_slider"></div>
-                    </div>
-                </div> 
-        
-        </div>
+		</div>
+		<script type="text/javascript">
+			new CusScrollBar({
+				contentSelector: '.scroll_cont', //滚动内容区
+				barSelector: '.scroll_bar', //滚动条
+				sliderSelector: '.scroll_slider' //滚动滑块
+			});
+		</script>
+	</figure>
+	<div class="conment">
+		<div class="conment-top">
+			<h1>用户评论</h1>
+		</div>
+		<div class="conment-main">
+		<div class="wapId"><div>
+		<script>
+			$(".wapId").load("conment.html");
+		</script>
 
-    </div>
-    <script type="text/javascript">
-        new CusScrollBar({
-            contentSelector: '.scroll_cont', //滚动内容区
-            barSelector: '.scroll_bar', //滚动条
-            sliderSelector: '.scroll_slider' //滚动滑块
-        });
-    </script>
-</figure>
-	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+	</div>
+	</div>
+</div>
+
+	<script>
+			$(function(){
+			  $("#head-nav").load("navbar.html");
+			})
+	  </script>
 	<script type="text/javascript">
 		//获取视频对象 H5写法
 		var myVideo = document.querySelector("#myVideo");

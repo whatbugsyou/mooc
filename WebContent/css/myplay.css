@@ -3,13 +3,14 @@
 	margin: 0;
 	background-color: #FFF;
 }
+
  
 figcaption{
 	width: 700px;
 	font-size: 22px;
 	font-family: 宋体;
 	margin-left: 30px;
-
+	margin-top: 20px;
 }
  
 a{
@@ -154,3 +155,11 @@ video{
 	margin-left: 200px;
 	margin-top: 20px;
 }
+.conment{
+	width: 1250px;
+	background: #dddcdc;
+}
+.conment-top h1{
+	margin-top: 20px;
+	margin-left: 20px;
+ }

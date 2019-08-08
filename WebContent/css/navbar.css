@@ -1,0 +1,22 @@
+.search   {
+    border-bottom:1px solid rgb(222, 217, 217)
+}
+.search input{
+    border: none; 
+    width: 150px !important;
+}
+.search:focus-within{
+    border-bottom:2px solid rgb(242, 60, 60) ;
+}
+.search:focus-within button span{
+    color:  rgb(242, 60, 60) !important;
+}
+.form-control:focus {
+    box-shadow: none !important;
+}
+
+nav{
+    font-size: 13px;
+    margin-top: -20px;
+}
+
