@@ -8,12 +8,13 @@
     <link rel="stylesheet" href="css/font-awesome.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/course.css">
+    <script src="js/jquery-3.3.1.min.js"></script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
-      <script src="js/jquery-3.3.1.min.js"></script>
+    <div id="head-nav"></div>
       <div class="top">
             <div class="main"><!--课程主体-->
                 <div class="box"><!--课程分类的外壳 -->
@@ -29,9 +30,9 @@
                            </div>
                             <!--搜索框-->      
                             <div class="search search-box">
-                            <form>
-                            <input type="text" placeholder="搜索从这里开始...">
-                            <button type="submit"></button>
+                            <form method="POST" id="form">
+                            <input type="text" name="searchtext" id="searchtext" placeholder="搜索从这里开始...">
+                            <button type="button" id="search-course"></button>
                             </form>
                             </div>
                         </div>
@@ -43,58 +44,14 @@
                                             <span class="hd l">分类：</span>
                                             <div class="bd">
                                                     <ul class>
-                                                        <li class="course-nav-item on">
+                                                                                                                                                            <li class="course-nav-item on">
                                                             <a href="/course/list?">全部</a>
                                                         </li>
-                                                         <li class="course-nav-item">
+                                                                                                                                                                                        <li class="course-nav-item">
                                                                     <a href="/course/list?c=html" data-id="7" data-ct="html">HTML/CSS</a>
                                                                 </li>
-                                                                <li class="course-nav-item">
-                                                                    <a href="/course/list?c=javascript" data-id="44" data-ct="javascript">JavaScript</a>
-                                                                </li>
-                                                                <li class="course-nav-item">
-                                                                    <a href="/course/list?c=vuejs" data-id="1423" data-ct="vuejs">Vue.js</a>
-                                                                </li>
-                                                                <li class="course-nav-item">
-                                                                    <a href="/course/list?c=reactjs" data-id="1374" data-ct="reactjs">React.JS</a>
-                                                                </li>
-                                                                <li class="course-nav-item">
-                                                                    <a href="/course/list?c=angular" data-id="1123" data-ct="angular">Angular</a>
-                                                                </li>
-                                                                <li class="course-nav-item">
-                                                                    <a href="/course/list?c=nodejs" data-id="222" data-ct="nodejs">Node.js</a>
-                                                                </li>
-                                                                <li class="course-nav-item">
-                                                                    <a href="/course/list?c=jquery" data-id="219" data-ct="jquery">jQuery</a>
-                                                                </li>
-                                                                <li class="course-nav-item">
-                                                                    <a href="/course/list?c=bootstrap" data-id="1263" data-ct="bootstrap">Bootstrap</a>
-                                                                </li>
-                                                                <li class="course-nav-item">
-                                                                    <a href="/course/list?c=sassless" data-id="1429" data-ct="sassless">Sass/Less</a>
-                                                                </li>
-                                                                <li class="course-nav-item">
-                                                                    <a href="/course/list?c=webapp" data-id="1260" data-ct="webapp">WebApp</a>
-                                                                </li>
-                                                                <li class="course-nav-item">
-                                                                    <a href="/course/list?c=miniprogram" data-id="5240" data-ct="miniprogram">小程序</a>
-                                                                </li>
-                                                                <li class="course-nav-item">
-                                                                    <a href="/course/list?c=fetool" data-id="1261" data-ct="fetool">前端工具</a>
-                                                                </li>
-                                                                <li class="course-nav-item">
-                                                                    <a href="/course/list?c=java" data-id="220" data-ct="java">Java</a>
-                                                                </li>
-                                                                <li class="course-nav-item">
-                                                                    <a href="/course/list?c=springboot" data-id="4903" data-ct="springboot">SpringBoot</a>
-                                                                </li>
-                                                                <li class="course-nav-item">
-                                                                    <a href="/course/list?c=springcloud" data-id="5241" data-ct="springcloud">Spring Cloud</a>
-                                                                </li>
-                                                                <li class="course-nav-item">
-                                                                    <a href="/course/list?c=python" data-id="1118" data-ct="python">Python</a>
-                                                                </li>       
-                                                     </ul>
+                                                                                                         
+                                                                                                                                                 </ul>
                                                 </div>
                                         </div>
                                    </div>
@@ -226,6 +183,20 @@
   </body>
 </html>
 <script>
+        $(function(){
+            $("#search-course").click(function(){        
+                $.get("http://localhost:8080/mooc/searchcourse.do"+$("#form").serialize(),
+                    function (res) {
+                        
+                    }
+                );
+            });
+        });
+
+        $(function(){
+          $("#head-nav").load("navbar.html");
+        })
+
     $(".moco-change-smalle-btn").click(function(){
         $(".moco-change-smalle-btn").eq($(this).index()).css('background','#9199a1').siblings().css('background','#e0e0e0');
     })
