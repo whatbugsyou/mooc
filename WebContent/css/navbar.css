@@ -16,13 +16,14 @@
 }
 
 nav{
-    font-size: 13px;
-    margin-top: -20px;
+    font-size: 15px;
+    margin-top: -10px;
+    box-shadow: -1px -2px 8px black;
 }
-#login{
+
+#login,#register{
     position: absolute;
     background-color: rgb(203, 203, 203);
     z-index: 10;
-
 }
 
