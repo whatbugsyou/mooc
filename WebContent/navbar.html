@@ -1,90 +1,132 @@
-<nav class="navbar navbar-expand-sm navbar-light ">
+<nav id="navbar" class="navbar navbar-expand-sm navbar-light ">
     <a class="navbar-brand" href="#"><img src="img/logo.png" alt="logo" style="height: 72px"></a>
     <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
         aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"></button>
     <div class="collapse navbar-collapse " id="collapsibleNavId">
         <ul class="navbar-nav mr-auto mt-0 mt-lg-0">
-            <li class="nav-item">
-                <a class="nav-link" href="#">课程</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">实战</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">就业班</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">专栏</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">猿问</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">手记</a>
-            </li>
+            <li class="nav-item"><a class="nav-link" href="#">课程</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">实战</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">就业班</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">专栏</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">猿问</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">手记</a></li>
             <form class="form-inline my-2 my-lg-0">
                 <div class="input-group search">
                     <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                    <button class="btn  my-2 my-sm-0 btn-outline-danger" style="border: 0ch" type="submit"><span
-                            class="fa fa-search" style="color: rgb(187, 186, 186)" aria-hidden="true"></span></button>
+                    <button class="btn  my-2 my-sm-0 btn-outline-danger" style="border: 0ch" type="submit">
+                        <span class="fa fa-search" style="color: rgb(187, 186, 186)" aria-hidden="true"></span>
+                    </button>
                 </div>
             </form>
         </ul>
 
         <ul class="navbar-nav mt-2 mt-lg-0 navbar-left">
-            <li class="nav-item">
-                <a class="nav-link" href="#">邀请有奖</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">下载app</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">购物车</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" onclick="click_login()">登陆</a>
-            </li>
-            <li class="nav-item mt-lg-2" style="color:rgb(229, 232, 235)">
+            <li class="nav-item"><a class="nav-link" href="#">邀请有奖</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">下载app</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">购物车</a></li>
+        </ul>
+
+        <ul class="navbar-nav mt-2 mt-lg-0 navbar-left" v-if="!loginStatus">
+            <li class="nav-item"><a class="nav-link" href="#" onclick="click_login()">登陆</a></li>
+            <li class="nav-item mt-lg-2" style="color: rgb(229, 232, 235)">
                 <span>/</span>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">注册</a>
-            </li>
+            <li class="nav-item"><a class="nav-link" href="#" onclick="click_register()">注册</a></li>
         </ul>
+        <ul class="navbar-nav mt-2 mt-lg-0 navbar-left" v-if="loginStatus">
+            <li class="nav-item"><a class="nav-link" href="personalCenter.html">欢迎你!{{user.account}}</a></li>
+        </ul>
+
 
     </div>
 </nav>
-<div class="row mt-sm-5">
-    <div class="col-sm-12 offset-sm-4">
-        <div id="login" :style="style">
+<div class="container-fluid" id="login" :style="style">
+    <div class="row">
+        <button @click="close" class="btn btn-danger" type="button"
+            style="position: absolute;left: 63%;top: 67px;color: white;">
+            x </span>
+        </button>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 offset-4">
             <form method="POST" action="" class="form-horizontal">
                 <div class="form-group">
-                    <label for="account" class="col-sm-2 control-label">账号</label>
-                    <div class="col-sm-4">
-                        <input type="text" v-model="user.account" class="form-control" id="account" name="account"
-                            placeholder="Account">
-                    </div>
+                    <label for="account">账号:</label> <input type="text" v-model="user.account" class="form-control"
+                        name="account" placeholder="Account">
                 </div>
                 <div class="form-group">
-                    <label for="password" class="col-sm-2 control-label">密码:</label>
-                    <div class="col-sm-4">
-                        <input type="password" v-model="user.password" class="form-control" id="password" name="password"
-                            placeholder="Password">
-                    </div>
+                    <label for="password">密码:</label> <input type="password" v-model="user.password"
+                        class="form-control" name="password" placeholder="Password">
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-4">
-                        <button type="submit" @click.prevent="login" class="btn btn-success">登陆</button>
-                    </div>
+                    <button type="submit" @click.prevent="login" class="btn btn-success btn-block">登陆</button>
                 </div>
             </form>
         </div>
-    </div>
 
+
+    </div>
+</div>
+<div class="container-fluid" id="register" :style="style">
+    <div class="row">
+        <button @click="close" class="btn btn-danger" type="button"
+            style="position: absolute;left: 63%;top: 67px;color: white;">
+            x </span>
+        </button>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 offset-4">
+            <form method="POST" action="" class="form-horizontal">
+                <div class="form-group">
+                    <label for="account">账号:</label> <input type="text" v-model="user.account" class="form-control"
+                        name="account" placeholder="Account">
+                </div>
+                <div class="form-group">
+                    <label for="password">密码:</label> <input type="password" v-model="user.password"
+                        class="form-control" name="password" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <button type="submit" @click.prevent="register" class="btn btn-success btn-block">注册</button>
+                </div>
+            </form>
+        </div>
+
+
+    </div>
 </div>
 
 <script>
-
+    var nav_vm = new Vue({
+        el: '#navbar',
+        data: {
+            loginStatus: false,
+            user: {
+                uid: 0,
+                account: '',
+                password: '',
+                portrait: '',
+                signature: ''
+            }
+        },
+        methods: {
+            refreshStatus: function () {
+                $.ajax({
+                    type: "get",
+                    url: "isLogin.do",
+                    success: function (res) {
+                        if (res != undefined) {
+                            for (key in res) {
+                                nav_vm.user[key] = res[key];
+                            }
+                            if(nav_vm.user.account!=""){ 
+                                nav_vm.loginStatus=true;
+                            }
+                           
+                        }
+                    }
+                });
+            }
+        },
+        mounted: function () {
+            this.refreshStatus();
+        }
+    })
     var login_vm = new Vue({
         el: '#login',
         data: {
@@ -108,14 +150,61 @@
                     /* contentType:"application/json;charset=UTF-8", */
                     success: function (response) {
                         if (response == "ok") {
-                            console.log("登陆成功");
+                            alert("登陆成功");
+                            login_vm.style.display = 'none';
+                            nav_vm.refreshStatus();
+                        } else {
+                            alert("注册失败");
                         }
                     }
                 });
+            },
+            close: function () {
+                this.style.display = "none";
+            },
+
+        }
+    })
+    var register_vm = new Vue({
+        el: '#register',
+        data: {
+            style: {
+                display: 'none'
+            },
+            user: {
+                uid: 0,
+                account: '',
+                password: '',
+                portrait: '',
+                signature: ''
+            }
+        },
+        methods: {
+            login: function () {
+                $.ajax({
+                    type: "post",
+                    url: "register.do",
+                    data: this.user,
+                    success: function (response) {
+                        if (response == "ok") {
+                            alert("注册成功");
+                            register_vm.style.display = 'none';
+                        } else {
+                            alert("注册失败");
+                        }
+                    }
+                });
+            },
+            close: function () {
+                this.style.display = "none";
             }
         }
     })
+
     function click_login() {
         login_vm.style.display = 'block';
+    }
+    function click_register() {
+        register_vm.style.display = 'block';
     }
 </script>

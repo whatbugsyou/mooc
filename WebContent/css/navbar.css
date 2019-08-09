@@ -19,4 +19,10 @@ nav{
     font-size: 13px;
     margin-top: -20px;
 }
+#login{
+    position: absolute;
+    background-color: rgb(203, 203, 203);
+    z-index: 10;
+
+}
 

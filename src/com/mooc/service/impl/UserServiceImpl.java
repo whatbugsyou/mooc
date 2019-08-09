@@ -21,4 +21,14 @@ public class UserServiceImpl implements UserService {
 		}
 		return false;
 	}
+
+	@Override
+	public boolean register(User user) {
+		User user2 = userMapper.selectUserByAccount(user.getAccount());
+		if(user2==null) {
+			userMapper.insertUser(user);
+			return true;
+		}
+		return false;
+	}
 }
