@@ -8,5 +8,5 @@ import com.mooc.service.SubscribeService;
 @Controller
 public class SubscribeController {
 	@Autowired
-	private static SubscribeService subscribeService;
+	private SubscribeService subscribeService;
 }

@@ -9,5 +9,5 @@ import com.mooc.service.VideoService;
 @Service
 public class VideoSerciceImpl implements VideoService {
 	@Autowired
-	private static VideoMapper videoMapper;
+	private VideoMapper videoMapper;
 }

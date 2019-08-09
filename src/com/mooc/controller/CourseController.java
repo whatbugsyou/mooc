@@ -8,5 +8,5 @@ import com.mooc.service.CourseService;
 @Controller
 public class CourseController {
 	@Autowired
-	private static CourseService courseService;
+	private CourseService courseService;
 }

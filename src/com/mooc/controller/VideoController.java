@@ -8,5 +8,5 @@ import com.mooc.service.VideoService;
 @Controller
 public class VideoController {
 	@Autowired
-	private static VideoService videoService;
+	private VideoService videoService;
 }

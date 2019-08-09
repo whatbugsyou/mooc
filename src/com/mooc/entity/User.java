@@ -1,7 +1,13 @@
 package com.mooc.entity;
 
 public class User {
-    private Integer uid;
+    @Override
+	public String toString() {
+		return "User [uid=" + uid + ", account=" + account + ", password=" + password + ", portrait=" + portrait
+				+ ", signature=" + signature + "]";
+	}
+
+	private Integer uid;
 
     private String account;
 

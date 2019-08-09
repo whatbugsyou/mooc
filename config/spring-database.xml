@@ -31,13 +31,13 @@
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="typeAliasesPackage" value="com.mooc.entity"></property>
 		<!-- 加载sql配置文件:当配置文件和接口在同一个包下面并且名字一样，可以省略 -->
-	 	<!-- <property name="mapperLocations" value="classpath:com/mooc/dao/*.xml"></property> -->
+	 	<!-- <property name="mapperLocations" value="classpath:com/newer/dao/*.xml"></property>  -->
 	</bean>
 	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="sqlSessionFactoryBeanName"
 			value="sqlSessionFactory"></property>
-		<property name="basePackage" value="classpath:com.mooc.dao"></property>
+		<property name="basePackage" value="com.mooc.dao"></property>
 	</bean>
 	<!--创建事务平台管理器 -->
 	<bean id="transactionManager"

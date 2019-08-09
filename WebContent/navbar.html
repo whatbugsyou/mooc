@@ -104,8 +104,8 @@
                 $.ajax({
                     type: "post",
                     url: "login.do",
-                    data: JSON.stringify(this.user),
-                    contentType:"application/json;charset=UTF-8",
+                    data: this.user,
+                    /* contentType:"application/json;charset=UTF-8", */
                     success: function (response) {
                         if (response == "ok") {
                             console.log("登陆成功");

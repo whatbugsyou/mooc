@@ -8,5 +8,5 @@ import com.mooc.service.CourseService;
 @Service
 public class CourseServiceImpl implements CourseService{
 	@Autowired
-	private static CourseMapper courseMapper;
+	private CourseMapper courseMapper;
 }

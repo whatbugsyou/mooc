@@ -9,5 +9,5 @@ import com.mooc.service.CommentService;
 @Service
 public class CommentServiceImpl implements CommentService {
 	@Autowired
-	private static CommentMapper commentMapper;
+	private CommentMapper commentMapper;
 }

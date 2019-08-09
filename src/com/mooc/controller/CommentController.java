@@ -8,5 +8,5 @@ import com.mooc.service.CommentService;
 @Controller
 public class CommentController {
 	@Autowired
-	private static CommentService commentService;
+	private CommentService commentService;
 }

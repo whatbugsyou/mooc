@@ -17,16 +17,16 @@
 
 
 	<!-- 1.处理器映射器  -->
-	<bean
-		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"></bean>
+	<!-- <bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"></bean> -->
 
 	<!-- 2.处理器适配器 -->
-	<bean
+	<!-- <bean
 		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"></bean>
-
+ -->
  
  	<!-- 自动加载处理器适配器和处理器映射器 -->
-<!--  	<mvc:annotation-driven></mvc:annotation-driven> -->
+<mvc:annotation-driven></mvc:annotation-driven> 
 	<!-- 3.视图解析器 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
