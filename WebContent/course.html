@@ -26,7 +26,7 @@
                     <div class="top"><!--课程分类-->
                         <div class="course-top clearfix"><!--分类上部分，包括两个logo一个搜索框-->
                            <!--logo1-->
-                           <a class="course-top-logo1" href="course.html">
+                           <a class="course-top-logo1" href="javascript:void(0);" onclick="show()">
                                <img src="img/logo-course2.png" alt="课程" height="60">
                            </a>
                            <!--logo2-->
@@ -34,7 +34,7 @@
                                 <img src="img/course-top.png" style="cursor:default">
                            </div>
                             <!--搜索框-->      
-                            <div class="search search-box">
+                            <div class="search1 search-box">
                             <form method="POST" id="form">
                             <input type="text" name="searchtext" id="searchtext" placeholder="搜索从这里开始...">
                             <button type="button" id="search-course"></button>
@@ -48,14 +48,13 @@
                                         <div class="js-course-skills course-skills-box">
                                             <span class="hd l">分类：</span>
                                             <div class="bd">
-                                                    <ul class>
-                                                        <li class="course-nav-item on">
-                                                            <a href="/course/list?">全部</a>
+                                                    <ul  class="course-type">
+                                                        <!-- <li class="course-nav-item on">
+                                                            <a href="javascript:void(0);" onclick="show()">全部</a>
                                                         </li>
                                                         <li class="course-nav-item">
                                                                     <a href="/course/list?c=html" data-id="7" data-ct="html">HTML/CSS</a>
-                                                        </li>      
-                                                                                                         
+                                                        </li>                                                       -->
                                                     </ul>
                                                 </div>
                                         </div>
@@ -71,109 +70,14 @@
                         <!--课程排序---按时间，最新 和 按点击量，最热-->
                     <div class="course-tool-bar clearfix">
                         <div class="tool-left l">
-                            <a href=#" class="moco-change-smalle-btn active">最新</a>
-                            <a href="#" class="moco-change-smalle-btn">最热</a>
+                            <a  href="javascript:void(0);" onclick="show()" class="moco-change-smalle-btn active">最新</a>
+                            <a  href="#;" onclick="hot()" class="moco-change-smalle-btn ">最热</a>
                         </div>
                     </div>
                     <div class="course-list">
                         <div class="moco-course-list">
                             <div class="clearfix">
-                                <!--一个选项卡-->
-                              <!--   <div class="course-card-container">
-                                    <a target="_blank" href="#" class="course-card">
-                                        视频图片部分
-                                        <div class="course-card-top">
-                                            <img class="course-banner lazy" data-original="" 
-                                            style="display: inline;" src="img/html.jpg">
-                                            <div class="course-label">
-                                                    <label>HTML/CSS</label>
-                                            </div>
-                                        </div>
-                                        简介部分
-                                        <div class="course-card-content">
-                                            <h3 class="course-card-name">初识HTML+CSS</h3>
-                                            <div class="clearfix course-card-bottom">
-                                                <div class="course-card-info">
-                                                    <span>作者：xxx</span><span><i class="imv2-set-sns"></i>点击量：1055133</span>
-                                                </div>
-                                                <p class="course-card-desc">HTML+CSS基础教程8小时带领大家步步深入学习标签用法和意义</p>
-                                                <div class="course-card-price">
-                                                    <div class="price-box">
-                                                        <span class="price">免费</span>
-                                                        <div class="collect clearfix js-course-collect" data-cmd="follow" data-cid="9" title="收藏">
-                                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                                            <span>收藏</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                
-                                <div class="course-card-container">
-                                    <a target="_blank" href="#" class="course-card">
-                                        视频图片部分
-                                        <div class="course-card-top">
-                                            <img class="course-banner lazy" data-original="" 
-                                            style="display: inline;" src="img/java1.jpg">
-                                            <div class="course-label">
-                                                    <label>java</label>
-                                            </div>
-                                        </div>
-                                        简介部分
-                                        <div class="course-card-content">
-                                            <h3 class="course-card-name">JAVA</h3>
-                                            <div class="clearfix course-card-bottom">
-                                                <div class="course-card-info">
-                                                    <span>作者：入门</span><span><i class="imv2-set-sns"></i>点击量：1055133</span>
-                                                </div>
-                                                <p class="course-card-desc">本教程从Java环境搭建、工具使用、基础语法开始，带你入门</p>
-                                                <div class="course-card-price">
-                                                    <div class="price-box">
-                                                        <span class="price">免费</span>
-                                                        <div class="collect clearfix js-course-collect" data-cmd="follow" data-cid="9" title="收藏">
-                                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                                            <span>收藏</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-
-                                <div class="course-card-container">
-                                    <a target="_blank" href="#" class="course-card">
-                                        视频图片部分
-                                        <div class="course-card-top">
-                                            <img class="course-banner lazy"
-                                            style="display: inline;" src="img/html.jpg">
-                                            <div class="course-label">
-                                                    <label>${ctname}</label>
-                                            </div>
-                                        </div>
-                                        简介部分
-                                        <div class="course-card-content">
-                                            <h3 class="course-card-name">${cname}</h3>
-                                            <div class="clearfix course-card-bottom">
-                                                <div class="course-card-info">
-                                                    <span>作者：${cauthor}</span><span><i class="imv2-set-sns"></i>点击量：${cplayvolume}</span>
-                                                </div>
-                                                <p class="course-card-desc">${cdesc}}</p>
-                                                <div class="course-card-price">
-                                                    <div class="price-box">
-                                                        <span class="price">免费</span>
-                                                        <div class="collect clearfix js-course-collect" data-cmd="follow" data-cid="9" title="收藏">
-                                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                                            <span>收藏</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div> -->
+  
                             </div>
                         </div>
                     </div>
@@ -186,61 +90,135 @@
   </body>
 </html>
 <script>
-        // $(function(){
-                  
-        //     $.ajax("http://localhost:8080/mooc/show.do",
-        //             function (res) {
-        //                 $.each(res, function (index, course) { 
-        //                      $(".moco-course-list").append("<div class='course-card-container'>"
-        //                         +"<a target='_blank' href='#' class='course-card'>"
-        //                         +"<div class='course-card-top'>    <img class='course-banner lazy'"
-        //                         +"style='display: inline;' src='img/html.jpg'>"
-        //                         +"<div class='course-label'><label>java</label></div></div>"
-        //                         +" <div class='course-card-content'>"
-        //                         +"<h3 class='course-card-name'>"+course.cname+"</h3> <div class='clearfix course-card-bottom'>"
-        //                         +"<div class='course-card-info'> <span>作者："+course.cauthor+"</span><span><i class='imv2-set-sns'></i>点击量："+course.cplayvolume+"</span>"
-        //                         +"</div> <p class='course-card-desc'>"+course.cdesc+"</p>"
-        //                         +"<div class='course-card-price'>"
-        //                         +"<div class='price-box'>"
-        //                         +"<span class='price'>免费</span>"
-        //                         +"<div class='collect clearfix js-course-collect' data-cmd='follow' data-cid='9' title='收藏'>" 
-        //                         +"<i class='fa fa-star' aria-hidden='true'></i><span>收藏</span>"
-        //                         +" </div> </div> </div> </div> </div></a> </div>");
-        //                 });
-        //             }
-        //         );
-        // })
-            
-        $(function(){
+
             $("#search-course").click(function(){        
                 $.get("http://localhost:8080/mooc/searchcourse.do?"+$("#form").serialize(),
-                    function (res) {
-                        $.each(res, function (index, course) { 
-                             $(".moco-course-list").append("<div class='course-card-container'>"
-                                +"<a target='_blank' href='#' class='course-card'>"
-                                +"<div class='course-card-top'>    <img class='course-banner lazy'"
-                                +"style='display: inline;' src='img/html.jpg'>"
-                                +"<div class='course-label'><label>java</label></div></div>"
-                                +" <div class='course-card-content'>"
-                                +"<h3 class='course-card-name'>"+course.cname+"</h3> <div class='clearfix course-card-bottom'>"
-                                +"<div class='course-card-info'> <span>作者："+course.cauthor+"</span><span><i class='imv2-set-sns'></i>点击量："+course.cplayvolume+"</span>"
-                                +"</div> <p class='course-card-desc'>"+course.cdesc+"</p>"
+                function (res) {    
+                    	    $(".moco-course-list").html("");
+          	              $.each(res, function (index, course) { 	          	        
+                         $(".moco-course-list").append("<div class='course-card-container'>"
+                        +"<a target='_blank' href='' class='course-card'>"
+                  +"<div class='course-card-top'>    <img class='course-banner lazy'"
+                        +"style='display: inline;' src='img/html.jpg'>"
+                     +"<div class='course-label'><label>"+"点击量："+course.cplayvolume+"</label></div></div>"
+                      +" <div class='course-card-content'>"
+                       +"<h3 class='course-card-name'>"+course.cname+"</h3> <div class='clearfix course-card-bottom'>"
+                        +"<div class='course-card-info'> <span>作者："+course.cauthor+"</span>"
+                          +"</div> <p class='course-card-desc'>"+course.cdesc+"</p>"
                                 +"<div class='course-card-price'>"
-                                +"<div class='price-box'>"
-                                +"<span class='price'>免费</span>"
-                               
-                                +"<i class='fa fa-star' aria-hidden='true'></i><span>收藏</span>"
-                                +" </div> </div> </div> </div> </div></a> </div>");
-                        });
-                    }
+                               +"<div class='price-box'>"
+                            +"<span class='price'>免费</span>"
+                            +"<div class='collect clearfix js-course-collect' data-cmd='follow' data-cid='"+course.cid+"' title='收藏'>" 
+                             +"<i class='fa fa-star-o' aria-hidden='true'></i><span>收藏</span>"
+                             +" </div> </div> </div> </div> </div></a> </div>");
+                     });
+                 }
                 );
             });
-        });
 
+            function show(){               
+         		$.get("http://localhost:8080/mooc/show.do",
+         		/* 	 $(".moco-course-list").html(""); */
+                 function (res) {    
+                    	    $(".moco-course-list").html("");
+          	              $.each(res, function (index, course) { 	          	        
+                         $(".moco-course-list").append("<div class='course-card-container'>"
+                        +"<a target='_blank' href='showVideo.do?cid="+course.cid+"' class='course-card'>"
+                  +"<div class='course-card-top'>    <img class='course-banner lazy'"
+                        +"style='display: inline;' src='img/html.jpg'>"
+                     +"<div class='course-label'><label>"+"点击量："+course.cplayvolume+"</label></div></div>"
+                      +" <div class='course-card-content'>"
+                       +"<h3 class='course-card-name'>"+course.cname+"</h3> <div class='clearfix course-card-bottom'>"
+                        +"<div class='course-card-info'> <span>作者："+course.cauthor+"</span> "
+                          +"</div> <p class='course-card-desc'>"+course.cdesc+"</p>"
+                                +"<div class='course-card-price'>"
+                               +"<div class='price-box'>"
+                            +"<span class='price'>免费</span>"
+                            +"<div class='collect clearfix js-course-collect' data-cmd='follow' data-cid='"+course.cid+"' title='收藏'>" 
+                             +"<i class='fa fa-star-o' aria-hidden='true'></i><span>收藏</span>"
+                             +" </div> </div> </div> </div> </div></a> </div>");
+                     });
+                 }
+           );
+         }
+         function hot(){               
+         		$.get("http://localhost:8080/mooc/hot.do",
+         		/* 	 $(".moco-course-list").html(""); */
+                 function (res) {    
+                    	    $(".moco-course-list").html("");
+          	              $.each(res, function (index, course) { 	          	        
+                         $(".moco-course-list").append("<div class='course-card-container'>"
+                        +"<a target='_blank' href='#' class='course-card'>"
+                  +"<div class='course-card-top'>    <img class='course-banner lazy'"
+                        +"style='display: inline;' src='img/html.jpg'>"
+                     +"<div class='course-label'><label>"+"点击量："+course.cplayvolume+"</label></div></div>"
+                      +" <div class='course-card-content'>"
+                       +"<h3 class='course-card-name'>"+course.cname+"</h3> <div class='clearfix course-card-bottom'>"
+                        +"<div class='course-card-info'> <span>作者："+course.cauthor+"</span>"
+                          +"</div> <p class='course-card-desc'>"+course.cdesc+"</p>"
+                                +"<div class='course-card-price'>"
+                               +"<div class='price-box'>"
+                            +"<span class='price'>免费</span>"
+                            +"<div class='collect clearfix js-course-collect' data-cmd='follow' data-cid='"+course.cid+"' title='收藏'>" 
+                             +"<i class='fa fa-star-o' aria-hidden='true'></i><span>收藏</span>"
+                             +" </div> </div> </div> </div> </div></a> </div>");
+                     });
+                 }
+           );
+         }
+
+
+         function showType(){
+            $.get("http://localhost:8080/mooc/showType.do",
+                function (res) {
+                    $(".course-type").html("");
+                    $(".course-type").append(" <li class='course-nav-item on'>"
+                            +"<a href='javascript:void(0);' onclick='show()'> 全部</a>"
+                            +"</li>");
+                    $.each(res, function (index, coursetype) { 
+                    
+                         $(".course-type").append(" <li class='course-nav-item'>"
+                            +"<a  href='javascript:void(0);' onclick='selectCourseByType("+coursetype.ctid+")' >"+coursetype.ctname+"</a>"
+                            +"</li>")
+                    });
+                }
+            );
+         }
+
+         function selectCourseByType(ctid){
+            console.log(ctid);
+
+            $.get("http://localhost:8080/mooc/selectCourseByType.do",{"ctid":ctid},
+         		/* 	 $(".moco-course-list").html(""); */
+                     function (res) {    
+                    	    $(".moco-course-list").html("");
+          	              $.each(res, function (index, course) { 	          	        
+                         $(".moco-course-list").append("<div class='course-card-container'>"
+                        +"<a target='_blank' href='#' class='course-card'>"
+                  +"<div class='course-card-top'>    <img class='course-banner lazy'"
+                        +"style='display: inline;' src='img/html.jpg'>"
+                     +"<div class='course-label'><label>"+"点击量："+course.cplayvolume+"</label></div></div>"
+                      +" <div class='course-card-content'>"
+                       +"<h3 class='course-card-name'>"+course.cname+"</h3> <div class='clearfix course-card-bottom'>"
+                        +"<div class='course-card-info'> <span>作者："+course.cauthor+"</span>"
+                          +"</div> <p class='course-card-desc'>"+course.cdesc+"</p>"
+                                +"<div class='course-card-price'>"
+                               +"<div class='price-box'>"
+                            +"<span class='price'>免费</span>"
+                            +"<div class='collect clearfix js-course-collect' data-cmd='follow' data-cid='"+course.cid+"' title='收藏'>" 
+                             +"<i class='fa fa-star-o' aria-hidden='true'></i><span>收藏</span>"
+                             +" </div> </div> </div> </div> </div></a> </div>");
+                     });
+                 }
+           );
+         }
+         
         $(function(){
-          $("#head-nav").load("navbar.html");
+          $("#head-nav").load("navbar.html");      
+          showType();
+          show();
         })
-
+	
     $(".moco-change-smalle-btn").click(function(){
         $(".moco-change-smalle-btn").eq($(this).index()).css('background','#9199a1').siblings().css('background','#e0e0e0');
     })

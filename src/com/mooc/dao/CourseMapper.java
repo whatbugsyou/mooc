@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.mooc.entity.Course;
+import com.mooc.entity.Coursetype;
 
 @Repository
 public interface CourseMapper {
@@ -13,5 +14,11 @@ public interface CourseMapper {
 	List<Course> selectLikeCname(String name);
 
 	List<Course> selectAll();
+
+	List<Coursetype> selectAllType();
+
+	List<Course> selectCourseByCtid(int ctid);
+
+	List<Course> selectByCplayvolume();
 
 }
