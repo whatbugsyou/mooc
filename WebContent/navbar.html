@@ -162,7 +162,7 @@
                             login_vm.style.display = 'none';
                             nav_vm.refreshStatus();
                         } else {
-                            alert("注册失败");
+                            alert("登陆失败");
                         }
                     }
                 });
@@ -188,7 +188,7 @@
             }
         },
         methods: {
-            login: function () {
+            register: function () {
                 $.ajax({
                     type: "post",
                     url: "register.do",
