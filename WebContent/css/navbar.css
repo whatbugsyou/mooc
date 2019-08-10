@@ -15,20 +15,10 @@
     box-shadow: none !important;
 }
 
-nav{
-    font-size: 15px;
+.navbar{
+    font-size: 18px;
     margin-top: -10px;
     box-shadow: -1px -2px 8px black;
-}
-
-.shadow{
-    position: absolute;
-    top: 88px;
-    right: 0px;
-    left: 0px;
-    bottom: 0px;
-    background-color: rgba(41, 41, 41,0.6);
-    z-index: 2;
 }
 .title{
     text-align: center;
