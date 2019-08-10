@@ -9,27 +9,54 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mooc.entity.Course;
+import com.mooc.entity.Coursetype;
 import com.mooc.service.CourseService;
 
 @Controller
 public class CourseController {
 	@Autowired
 	private CourseService courseService;
-
+//通过关键名查询课程，展现课程
 	@RequestMapping("/searchcourse.do")
+	@ResponseBody 
 	public  List<Course> searchcourse( String searchtext){
-		System.out.println(searchtext);
-		 List<Course> list =courseService.searchcourse(searchtext);
-		 System.out.println(list);
+		 List<Course> list =courseService.selectLikeCname(searchtext);
 		return list;
 		
 	}
+	//展示课程卡，默认按上传时间排序
 	@RequestMapping("/show.do")
-	public  List<Course> searchcourse(){
-		 List<Course> list =courseService.show();
-		 System.out.println(list);
-		return list;
-		
+	@ResponseBody 
+	public  List<Course> show(){
+		 List<Course> list =courseService.selectAll();
+		return list;	
 	}
+	
+	//按点击量排序展现课程卡
+	@RequestMapping("/hot.do")
+	@ResponseBody 
+	public  List<Course> hot(){
+		System.out.println("有进这个功能吗？");
+		 List<Course> list =courseService.selectByCplayvolume();
+		 for (Course course : list) {
+			System.out.println(course.getCname()+"----有返回值");
+		}
+		return list;	
+	}
+	//展示课程类型
+	@RequestMapping("/showType.do")
+	@ResponseBody
+	public  List<Coursetype> showType(){
 
+		 List<Coursetype> list =courseService.selectAllType();
+
+		return list;	
+	}
+	//通过课程类型展示课程
+	@RequestMapping("/selectCourseByType.do")
+	@ResponseBody
+	public  List<Course> selectCourseByType(int ctid){
+		 List<Course> list =courseService.selectCourseByCtid(ctid);
+		return list;	
+	}
 }

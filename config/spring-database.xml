@@ -20,10 +20,10 @@
 	<!-- 配置连接池 datasource -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="url" value="${url}"></property>
-		<property name="driverClassName" value="${driver}"></property>
-		<property name="username" value="${username}"></property>
-		<property name="password" value="${password}"></property>
+		<property name="url" value="${jdbc.url}"></property>
+		<property name="driverClassName" value="${jdbc.driver}"></property>
+		<property name="username" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
 	</bean>
 	
 	<bean id="sqlSessionFactory"
