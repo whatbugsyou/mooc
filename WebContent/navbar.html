@@ -40,54 +40,62 @@
 
     </div>
 </nav>
-<div class="container-fluid" id="login" :style="style">
-    <div class="row">
-        <button @click="close" class="btn btn-danger" type="button"
-            style=" position: absolute; left: 97%; top: 0px; color: white;">
-            x </span>
-        </button>
-        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 offset-4">
-            <form method="POST" action="" class="form-horizontal">
-                <div class="form-group">
-                    <label for="account">账号:</label> <input type="text" v-model="user.account" class="form-control"
-                        name="account" placeholder="Account">
+<div id="login" :style="style">
+    <div class="shadow">
+        <div class="container-fluid" >
+            <div class="row">
+                <button @click="close" class="btn btn-danger" type="button"
+                    style=" position: absolute; left: 97%; top: 0px; color: white;">
+                    x </span>
+                </button>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 offset-4"
+                    style="margin-top: 100px; background-color: rgb(255, 255, 255)">
+                     <legend class="title">登陆</legend>
+                    <form method="POST" action="" class="form-horizontal">
+                        <div class="form-group">
+                            <label for="account">账号:</label> <input type="text" v-model="user.account"
+                                class="form-control" name="account" placeholder="Account">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">密码:</label> <input type="password" v-model="user.password"
+                                class="form-control" name="password" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" @click.prevent="login" class="btn btn-success btn-block">登陆</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label for="password">密码:</label> <input type="password" v-model="user.password"
-                        class="form-control" name="password" placeholder="Password">
-                </div>
-                <div class="form-group">
-                    <button type="submit" @click.prevent="login" class="btn btn-success btn-block">登陆</button>
-                </div>
-            </form>
+            </div>
         </div>
-
-
     </div>
 </div>
-<div class="container-fluid" id="register" :style="style">
-    <div class="row">
-        <button @click="close" class="btn btn-danger" type="button"
-            style=" position: absolute; left: 97%; top: 0px; color: white;">
-            x </span>
-        </button>
-        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 offset-4">
-            <form method="POST" action="" class="form-horizontal">
-                <div class="form-group">
-                    <label for="account">账号:</label> <input type="text" v-model="user.account" class="form-control"
-                        name="account" placeholder="Account">
+<div  id="register" :style="style">
+    <div class="shadow">
+        <div class="container-fluid" >
+            <div class="row">
+                <button @click="close" class="btn btn-danger" type="button"
+                    style=" position: absolute; left: 97%; top: 0px; color: white;">
+                    x </span>
+                </button>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 offset-4" style="margin-top: 100px; background-color: rgb(255, 255, 255)">
+                    <legend class="title">注册</legend>
+                    <form method="POST" action="" class="form-horizontal">
+                        <div class="form-group">
+                            <label for="account">账号:</label> <input type="text" v-model="user.account"
+                                class="form-control" name="account" placeholder="Account">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">密码:</label> <input type="password" v-model="user.password"
+                                class="form-control" name="password" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" @click.prevent="register"
+                                class="btn btn-success btn-block">注册</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label for="password">密码:</label> <input type="password" v-model="user.password"
-                        class="form-control" name="password" placeholder="Password">
-                </div>
-                <div class="form-group">
-                    <button type="submit" @click.prevent="register" class="btn btn-success btn-block">注册</button>
-                </div>
-            </form>
+            </div>
         </div>
-
-
     </div>
 </div>
 
@@ -114,10 +122,10 @@
                             for (key in res) {
                                 nav_vm.user[key] = res[key];
                             }
-                            if(nav_vm.user.account!=""){ 
-                                nav_vm.loginStatus=true;
+                            if (nav_vm.user.account != "") {
+                                nav_vm.loginStatus = true;
                             }
-                           
+
                         }
                     }
                 });
