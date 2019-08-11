@@ -3,11 +3,21 @@ package com.mooc.service;
 import java.util.List;
 
 import com.mooc.entity.Course;
+import com.mooc.entity.Coursetype;
+import com.mooc.entity.Video;
 
 public interface CourseService {
 
-	List<Course> searchcourse(String searchtext);
+	List<Course> selectLikeCname(String searchtext);
 
-	List<Course> show();
+	List<Course> selectAll();
+
+	List<Coursetype> selectAllType();
+
+	List<Course> selectCourseByCtid(int ctid);
+
+	List<Course> selectByCplayvolume();
+
+
 
 }

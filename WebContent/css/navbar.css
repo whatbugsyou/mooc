@@ -15,8 +15,14 @@
     box-shadow: none !important;
 }
 
-nav{
-    font-size: 13px;
-    margin-top: -20px;
+.navbar{
+    font-size: 18px;
+    margin-top: -10px;
+    box-shadow: -1px -2px 8px black;
 }
-
+.title{
+    text-align: center;
+    background-color: rgb(92, 179, 255);
+    margin-left: 0px;
+    margin-right: 0px;
+}

@@ -12,11 +12,28 @@
   </resultMap>
   
 
- <select id="searchcourse"  parameterType="string"  resultType="com.mooc.entity.Course">
- 		select * from course where cname like CONCAT('%',#{cname),'%')
+ <select id="selectLikeCname"  parameterType="string"  resultType="com.mooc.entity.Course">
+ 		select * from course where cname like concat(concat("%",#{cname}),"%")
  </select>
- <select id="selectAllCourse" resultType="com.mooc.entity.Course">
- 	select * from course
+ <select id="selectAll"  resultType="com.mooc.entity.Course">
+ 		select * from course order by 'cuploedTime' DESC
+ </select>
+   <select id="selectByCplayvolume"  resultType="com.mooc.entity.Course">
+ 		select * from course order by cplayvolume DESC
+ </select>
+<select id="selectAllType"  resultType="com.mooc.entity.Coursetype">
+	select * from coursetype
+</select>
+
+<select id="selectCourseByCtid"  parameterType="int"  resultType="com.mooc.entity.Course">
+ 		select * from course where ctid = #{ctid}
  </select>
 
+<select id="selectVidioByCid" parameterType="int"  resultType="com.mooc.entity.Video" >
+	select * from video where cid = #{cid}
+</select>
+<update id="insertPlayColum" parameterType="int" >
+	update course set cplayvolume = cplayvolume + 1 where cid = #{cid}
+	
+</update>
 </mapper>

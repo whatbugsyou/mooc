@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.mooc.dao.CourseMapper;
 import com.mooc.entity.Course;
+import com.mooc.entity.Coursetype;
+import com.mooc.entity.Video;
 import com.mooc.service.CourseService;
 @Service
 public class CourseServiceImpl implements CourseService{
@@ -16,18 +18,40 @@ public class CourseServiceImpl implements CourseService{
 
 
 	@Override
-	public List<Course> searchcourse(String name) {
+	public List<Course> selectLikeCname(String name) {
 		// TODO Auto-generated method stub
 		List<Course> list =courseMapper.selectLikeCname( name);
-		System.out.println("我进服务层了");
 		return list;
 	}
 
 	@Override
-	public List<Course> show() {
+	public List<Course> selectAll() {
 		// TODO Auto-generated method stub
 		List<Course> list=courseMapper.selectAll();
 		return list;
 	}
+
+	@Override
+	public List<Course> selectByCplayvolume() {
+		// TODO Auto-generated method stub
+		List<Course> list=courseMapper.selectByCplayvolume();
+		return list;
+	}
+
+	@Override
+	public List<Coursetype> selectAllType() {
+		List<Coursetype> list =courseMapper.selectAllType();
+		return list;
+	}
+
+	@Override
+	public List<Course> selectCourseByCtid(int ctid) {
+		// TODO Auto-generated method stub
+		List<Course> list =courseMapper.selectCourseByCtid(ctid);
+		return list;
+	}
+
+
+
 
 }

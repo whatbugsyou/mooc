@@ -23,7 +23,11 @@ public interface UserMapper {
 	@Delete("<script> delete from user where uid in <foreach collection='array' open='(' close=')' separator=',' item='uid' > #{uid} </foreach> </script> ")
 	public int deleteUserByIdList(int[] uidList);
 	
+<<<<<<< HEAD
 	@Update("update user set account=#{account}, password=#{password}, signature=#{signature}, portrait=#{portrait} where uid = #{uid}")
+=======
+	@Update("update user set account=#{account} password=#{password} signature=#{signature} portrait=#{portrait} where uid=#{uid}")
+>>>>>>> 3497af9915ef59150abfc8e8712463831cfd00d6
 	public int updateUser(User user);
 	
 	

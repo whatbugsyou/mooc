@@ -99,7 +99,6 @@
             overflow: hidden;
             cursor: pointer;
             position: relative;
-            z-index: 901;
             display: none;
             float: left;
             line-height: 0;

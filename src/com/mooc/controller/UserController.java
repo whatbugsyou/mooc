@@ -1,14 +1,18 @@
 package com.mooc.controller;
 
+<<<<<<< HEAD
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
+=======
+>>>>>>> 3497af9915ef59150abfc8e8712463831cfd00d6
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.HttpServletBean;
@@ -22,15 +26,16 @@ public class UserController {
 	private UserService userService;
 	
 	@PostMapping("/login.do")
-	public @ResponseBody String login( User user) {
-		System.out.println(user);
+	public @ResponseBody String login( User user,HttpServletRequest req) {
 		if(userService.login(user)) {
+			req.getSession().setAttribute("user", user);
 			return "ok";
 		}else {
 			return "false";
 		}
 
 	}
+<<<<<<< HEAD
 	
 	
 	/**
@@ -151,4 +156,19 @@ public class UserController {
 	}
 	
 
+=======
+	@PostMapping("/register.do")
+	public @ResponseBody String register( User user) {
+		if(userService.register(user)) {
+			return "ok";
+		}else {
+			return "false";
+		}
+	}
+	@RequestMapping("/isLogin.do")
+	public @ResponseBody  User isLogin(HttpServletRequest req) {
+		User user = (User) req.getSession().getAttribute("user");
+		return user;
+	}
+>>>>>>> 3497af9915ef59150abfc8e8712463831cfd00d6
 }

@@ -23,6 +23,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public User enterPersonalCenter() {
 		return userMapper.selectUserByUid(1);
 	}
@@ -30,5 +31,14 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int changeUser(User user) {
 		return userMapper.updateUser(user);
+=======
+	public boolean register(User user) {
+		User user2 = userMapper.selectUserByAccount(user.getAccount());
+		if(user2==null) {
+			userMapper.insertUser(user);
+			return true;
+		}
+		return false;
+>>>>>>> 3497af9915ef59150abfc8e8712463831cfd00d6
 	}
 }

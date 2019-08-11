@@ -1,262 +1,162 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta charset="utf-8">
-	<title>仿微博发布效果</title>
-	<style type="text/css">
-		*{margin:0;padding: 0;}
-		.wrap{
-			width:1200px;
-			height: 880px;
-			margin:0 auto;
-			box-shadow: 10px 10px 30px #ccc;
-			border-radius: 2px;
-			padding: 10px;
-			position: relative;
-			top: 50px;
-		}
-		.wrap .says{
-			width:1200px;
-			height: 200px;
- 			position: absolute;
-		}
-		.wrap .says h1{
-			font-size:18px;
-			color:#A8A8A8;
-			margin-bottom: 5px;
-		}
-		.wrap .says textarea{
-			width:1200px;
-			height: 100px;
-			outline: none;
-			resize: none;
-			border:1px solid #ccc;
-			border-radius: 3px;
-			padding: 5px;
-			color:#660000;
-		}
-		.wrap .says input{
-			width:100px;
-			height: 30px;
-			border:none;
-			cursor: pointer;
-			background: #00CC66;
-			color:white;
-			border-radius: 2px;
-			position: absolute;
-			right: 10px;
-			bottom: 5px;
-			transition: all ease 0.4s;
-			font-size: 16px;
-		}
-		.wrap .says input:hover{
-			filter:alpha(opaciyt:70);
-			opacity: 0.7;
-		}
-		.wrap .says ul{
-			width:1200px;
-			height: 640px;
- 			position: absolute;
-			bottom: 0;
-			overflow-x: hidden;
-			overflow-y: scroll;
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>记事本</title>
+<style type="text/css">
+*{margin:0; padding:0;}
+body,input{font-size:14px; line-height:24px; color:#333; font-family:Microsoft yahei, Song, Arial, Helvetica, Tahoma, Geneva;}
+h1{margin-bottom:15px; height:100px; line-height:100px; text-align:center; font-size:24px; }
+#content #post,#comment p{zoom:1;}
+#content #post:after,#comment p:after{display:block; height:0; clear:both; visibility:hidden; overflow:hidden; content:'.';}
+.transition{-webkit-transition:all 0.5s linear; -moz-transition:all 0.5s linear; -o-transition:all 0.5s linear; -ms-transition:all 0.5s linear; transition:all 0.5s linear;}
+#content{margin:0 auto; width:960px; overflow:hidden;}
+#content #post{margin-bottom:15px; padding-bottom:15px; border-bottom:1px #d4d4d4 dashed;
+	   height: 556px;
+   }
+#content #post textarea{display:block; margin-bottom:10px; padding:5px; width:948px; height:390px; border:1px #d1d1d1 solid; border-radius:5px; resize:none; outline:none;}
+#content #post textarea:hover{border:1px #9bdf70 solid; background:#f0fbeb;}
+#content #post #postBt,#content #post #clearBt{margin-left:5px; padding:3px; float:right;}
+#comment{overflow:hidden;}
+#comment p{margin-bottom:10px; padding:10px; border-radius:5px;}
+#comment p:nth-child(odd){border:1px solid #e3e197; background:#ffd;}
+#comment p:nth-child(even){border:1px solid #adcd3c; background:#f2fddb;}
+/*#comment p span{display:inline; float:left;}*/
+#comment p .right{text-align:right;}
+#comment p .msg{width:738px;}
+#comment p .datetime{width:200px; color:#999; text-align:right;}
 
- 		}
-		 .wrap .says ul li{
-			margin-top:20px;
-			width:1200px;
- 			border-bottom: 1px  dotted #b6b2b2;
-			list-style:none;
-			line-height: 57px;
-			font-size: 14px;
-			color:#606060;
-			overflow: hidden;
-			filter: alpha(opacity:0);
-			opacity: 0;
 
-		}
-		.wrap .says ul li span{
-			float: right;
-			margin-right: 30px;
-		}
-		.errmsg{
-			font-size: 14px;
-			color:red;
-			font-weight: bold;
-			filter: alpha(opacity:0);
-			opacity:0;
- 		}
- 		.wrap .says ul a{
- 			font-size: 14px;
- 			color:#990000;
- 			text-decoration: none;
- 			margin-left: 10px;
- 		}
- 		.wrap .says ul a:hover{
- 			color:red;
- 			text-decoration: underline;
- 		}
-	</style>
+
+</style>
+<script type="text/javascript">
+ var named;
+ function delete1(id)
+ {
+	 localStorage.removeItem(id);
+	 this.Storage.writeData();
+ }
+ function prom() {
+
+	 var name = prompt("请输入您的名字", "");//将输入的内容赋给变量 name ，
+	 named = name;
+	 //这里需要注意的是，prompt有两个参数，前面是提示的话，后面是当对话框出来后，在对话框里的默认值
+
+	 if (named)//如果返回的有内容
+
+	 {
+
+		 alert("欢迎您：" + name)
+		 document.getElementById("shangtian").style.display = "none";
+		 document.getElementById("ritian").value = named;
+
+	 }
+	 else {
+		 document.getElementById("ritian").value = "匿名发言者";
+	 }
+
+ }
+var Storage =
+{
+  saveData:function()//保存数据
+  {
+
+		  var data = document.querySelector("#post textarea");
+	  if(data.value != "")
+	  {
+		  var time = new Date().getTime() + Math.random() * 5;//getTime是Date对象中的方法，作用是返回 1970年01月01日至今的毫秒数
+		  if (named) {
+			  localStorage.setItem(time, data.value + "|" + named + "|" + this.getDateTime());//将毫秒数存入Key值中，可以降低Key值重复率
+		  }
+		  else
+		  {
+			  localStorage.setItem(time, data.value + "|" + "匿名发言者" + "|" + this.getDateTime());//将毫秒数存入Key值中，可以降低Key值重复率
+		  }
+
+		  data.value = "";
+		  this.writeData();
+	  }
+	  else
+	  {
+		  alert("请填写您的留言！");
+	 }
+  },
+  writeData:function()//输出数据
+  {
+	 var dataHtml = "", data = "";
+	  for(var i = localStorage.length-1; i >= 0; i--)//效率更高的循环方法
+	  {
+		  data = localStorage.getItem(localStorage.key(i)).split("|");
+
+			  //dataHtml += "<p><span class=\"msg\">" + data[0] + "</span><span class=\"datetime\">" + data[1] + "</span><span>" + data[2]+"</span></p>";
+		  dataHtml += "<span style=>" + data[1] + "<span style=\"float:right\">" + data[2] + "</span><p><span class=\"msg\">" + data[0] + "<input style=\"float:right;border:none;border-radius:5px;\" id=\"clearBt\" type=\"button\" onclick=\"delete1(" + localStorage.key(i) + ");\" value=\"删除\"/>" + "</span></p>";
+	  }
+	  document.getElementById("comment").innerHTML = dataHtml;
+  },
+  clearData:function()//清空数据
+  {
+	  if(localStorage.length > 0)
+	  {
+		  if(window.confirm("清空后不可恢复，是否确认清空？"))
+		  {
+			  localStorage.clear();
+			  this.writeData();
+		  }
+	  }
+	  else
+	 {
+		 alert("没有需要清空的数据！");
+	  }
+  },
+  getDateTime:function()//获取日期时间，例如 2012-03-08 12:58:58
+  {
+	  var isZero = function(num)//私有方法，自动补零
+	  {
+		  if(num < 10)
+		 {
+			  num = "0" + num;
+		  }
+		  return num;
+	  }
+	  
+	  var d = new Date();
+	  return d.getFullYear() + "-" + isZero(d.getMonth() + 1) + "-" + isZero(d.getDate()) + " " + isZero(d.getHours()) + ":" + isZero(d.getMinutes()) + ":" + isZero(d.getSeconds());
+  }            
+}
+
+window.onload = function()
+{
+  Storage.writeData();//当打开页面的时候，先将localStorage中的数据输出一边，如果没有数据，则输出空
+  document.getElementById("postBt").onclick = function(){Storage.saveData();}//发表评论按钮添加点击事件，作用是将localStorage中的数据输出
+  document.getElementById("clearBt").onclick = function(){Storage.clearData();}//清空所有已保存的数据
+}
+
+
+
+
+
+</script>
 </head>
+
 <body>
-	<div class="wrap">
-		<div class="says">
-			<h1>来，说说你在做什么，想什么...</h1>
-			<textarea>请点击发布试试吧<br>评论功能就这样时间紧迫</textarea>
-			<input type="button"  value="发布">
-			<div class="errmsg">请填写内容后再发布！</div>
+
+
+<div id="content">
+	<div id="post">
+		<div style="background:#3EADC5 ;height:30px;">
+			昵称：<input type="submit" id="shangtian" name="Submit3" style="border:none; background-color:#3EADC5; color:white;" value="默认用户点击改变" onClick="prom()" />
+			<input type="text" id="ritian" style="border:none; background-color:#3EADC5; color:white;"   onclick="prom()"/>
+			<!--disabled="disabled"-->
 		</div>
-		<ul>
-			 
-		</ul>
+		<div>
+			<textarea class="transition"></textarea>
+		</div>
+		<input id="postBt" type="button" style="border:none; background-color:#3EADC5; color:white;border-radius:5px; width:80px; height:30px;" value="发表留言"/>
+		<input id="clearBt" type="button" style="border:none; background-color:#3EADC5; color:white;border-radius:5px; width:80px; height:30px;" value="清空"/>
 	</div>
-	<script>
-		window.onload=function()
-		{
-			var oWrap=document.getElementsByClassName("wrap")[0];
-			var oTextarea=oWrap.getElementsByTagName("textarea")[0];
-			var oBtn=oWrap.getElementsByTagName("input")[0];
-			var oUl=oWrap.getElementsByTagName("ul")[0];
-			var errMsg=oWrap.getElementsByClassName("errmsg")[0];
-			var oA=document.getElementsByTagName("a");
-			//console.log(oA);
-			var t=new Date();
-			var Year=t.getFullYear();
-			var Month=t.getMonth()+1;
-			var Day=t.getDate();
-			var Hours=t.getHours();
-			var Minutes=t.getMinutes();
-			var Scondes=t.getSeconds();
-			var timers=toString(Year)+"年"+toString(Month)+"月"+toString(Day)+"日"+toString(Hours)+":"+toString(Minutes)+":"+toString(Scondes);//将获取到的日期对象拼接。
-			//console.log(timers);
-
-			function toString(n)//数字转字符串
-			{
-				if(n<9)
-				{
-					n="0"+n;
-				}
-				else
-				{
-					n=""+n;
-				}
-				return n;
-			};
-
-			oBtn.onclick=function()
-			{
-				if(oTextarea.value=="")
-				{
-					startMove(errMsg,{opacity:100});
-					//console.log(errMsg.style.opacity)
-					oTextarea.select();
-				}
-				else
-				{
-				var aLi=document.createElement("li");
-				var aSpan=document.createElement("span");
- 				//console.log(aLi);
-				//console.log(aSpan);
-				//oUl.appendChild(aLi);
-				//aLi.appendChild(aSpan);
-				aLi.innerHTML=oTextarea.value;
-				aSpan.innerHTML=timers+"<a href='javascript:;' title='删除这条信息'>删除</a>";
- 				//aSpan.innerHTML="<a href='javascript:;'>删除</a>"
-				if(oUl.children.length>0)
-				{
-					oUl.insertBefore(aLi,oUl.children[0]);
-					aLi.appendChild(aSpan);
-					oTextarea.value="";
- 				}
-				else
-				{
-					oUl.appendChild(aLi);
-					aLi.appendChild(aSpan);
-					oTextarea.value="";
- 				};
-				var aLiHeight=parseInt(getStyle(aLi,"height"));
-				//console.log(aLiHeight);
-					aLi.style.height="0";
-					startMove(aLi,{height:aLiHeight},function(){
-						startMove(aLi,{opacity:100});
-					});
-				delLi();//添加数据后加载删除模块	
-			}
-			};
- 			
- 			function delLi()
- 			{
- 				for(var i=0;i<oA.length;i++)
- 				{
- 					oA[i].onclick=function()
- 					{	
- 						liNode=this.parentNode.parentNode//获取到当前A标签的父节点，也就是LI
- 						var aLiHeight=parseInt(getStyle(liNode,"height"))+1;
- 						 //console.log(aLiHeight);
- 						 //链式运动操作：先进行透明化，再进行高度变小，最后删除DOM元素
- 						 startMove(liNode,{opacity:0},function(){
- 						 	startMove(liNode,{height:0},function(){
- 						 		oUl.removeChild(liNode);
- 						 	});
- 						 });
- 					}
- 				}
- 			}
-  		};
-
-		//运动框架
-		 function startMove(obj,json,endFn){
-		 	clearInterval(obj.timer);
-		 	obj.timer=setInterval(
-		 		function(){
-
-		 			var iStop=true;
-		 			for(var curr in json)
-		 			{
-		 				var oNumber=0;
-		 				if(curr=="opacity")
-		 				{
-		 					oNumber=Math.round(parseFloat(getStyle(obj,curr))*100);
-		 				}
-		 				else
-		 				{
-		 					oNumber=parseInt(getStyle(obj,curr));
-		 				}
-		 				var speed=(json[curr]-oNumber)/6;
-		 					speed=speed>0?Math.ceil(speed):Math.floor(speed);
-		 				if(oNumber!=json[curr])
-		 				iStop=false;
-		 				if(curr=="opacity")
-		 				{
-		 					obj.style.filter="alpha(opacity:"+(oNumber+speed)+")";
-		 					obj.style.opacity=(oNumber+speed)/100;
-		 				}	
-		 				else
-		 				{
-		 					obj.style[curr]=oNumber+speed+"px";
-		 				}
-		 			};
-		 			if(iStop)
-		 			{
-		 				clearInterval(obj.timer);
-		 				if(endFn)endFn();
-		 			}
-		 	},30);
-		 };
-
-		//获取非行间样式
-		function getStyle(obj,name)
-		{
-			if(obj.currentStyle)
-			{
-				obj=currentStyle[name];
-			}
-			else
-			{
-				obj=getComputedStyle(obj,false)[name];
-			}
-			return obj;
-		};
-	</script>
+	<div id="comment"></div>
+</div>
+  
+  
 </body>
 </html>

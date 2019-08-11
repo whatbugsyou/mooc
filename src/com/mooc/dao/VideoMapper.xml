@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mooc.dao.VideoMapper">
+  <resultMap id="BaseResultMap" type="com.mooc.entity.Video">
+    <id column="vid" jdbcType="INTEGER" property="cvd" />
+    <result column="vname" jdbcType="VARCHAR" property="vname" />
+    <result column="vepisode" jdbcType="VARCHAR" property="vepisode" />
+    <result column="vaddress" jdbcType="VARCHAR" property="vaddress" />
+    <result column="cid" jdbcType="INTEGER" property="cid" />
+  </resultMap>
+  
+
+<select id="selectVidioByCid" parameterType="int"  resultType="com.mooc.entity.Video" >
+	select * from video where cid = #{cid}
+</select>
+<update id="insertPlayColum" parameterType="int" >
+	update course set cplayvolume = cplayvolume + 1 where cid = #{cid}
+</update>
+<select id="showVideoByvid" parameterType="int"  resultType="com.mooc.entity.Video" >
+	select * from video where vid = #{vid}
+</select>
+</mapper>
