@@ -21,4 +21,14 @@ public class UserServiceImpl implements UserService {
 		}
 		return false;
 	}
+
+	@Override
+	public User enterPersonalCenter() {
+		return userMapper.selectUserByUid(1);
+	}
+
+	@Override
+	public int changeUser(User user) {
+		return userMapper.updateUser(user);
+	}
 }

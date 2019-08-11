@@ -72,4 +72,13 @@ public class Course {
     public void setCtid(Integer ctid) {
         this.ctid = ctid;
     }
+
+	@Override
+	public String toString() {
+		return "Course [cid=" + cid + ", cname=" + cname + ", cdesc=" + cdesc + ", cplayvolume=" + cplayvolume
+				+ ", cauthor=" + cauthor + ", cuploadtime=" + cuploadtime + ", ctid=" + ctid + "]";
+	}
+    
+    
+    
 }

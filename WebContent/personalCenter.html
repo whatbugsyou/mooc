@@ -14,6 +14,12 @@
         <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
         <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="js/lwg/jquery-3.4.1.js"></script>
+        <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <!--用的较多的样式-->
         <style>
             .list-group-item-style{
@@ -30,28 +36,63 @@
             }
             .person-info-style{
                 height:56px;
-                width:670px;
+                width:650px;
                 margin-left:8px;
                 line-height:35px;
                 padding:10px 0 10px 30px;
                 border-bottom: 1px solid #d9dde1;
                 font-size: 16px;
             }
-            .not-conts{
+            .not-conts-subscribe{
                 font-size: 18px;
                 color: #b5b9bc;
                 text-align: center;
                 padding: 145px 0 245px;
             }
-            .not-conts .find-course{
+            .not-conts-subscribe .find-course{
                 color: #f01400;
+            }
+            .fileBox{
+                display:inline-block;
+                width:60px; 
+                height:50px; 
+                position:relative;
+                overflow:hidden;
+                cursor: pointer;
+                text-align: center;
+                line-height: 76px;
+                text-decoration: none;
+                font-size: 14px;
+            }
+            .fileBox input{
+                position:absolute;
+                left:0; 
+                top:0; 
+                opacity:0; 
+                font-size: 100px;
+                filter:alpha(opacity=0);
+                width: 50px;
+                height: 40px;
+            }
+            .subscribe-item{
+                width: 180px;
+                height:240px; 
+                background: #eaf0f7;
+                float: left;
+                margin-left: 20px;
+            }
+            .small-info-div{
+                width: 100%;
+                height:100px;
+            }
+            .subscribe-cancel :hover{
+                cursor: pointer;
             }
         </style>
     </head>
     <body>
-        <object style="border:0px" type="text/x-scriptlet" data="navbar.html" width=100% height=90></object>
-
         <!--页面主体-->
+        <div style="height: 50px;"></div>
         <div class="container mt-3">
             <div class="row">
 
@@ -59,10 +100,12 @@
                 <div class="col-lg-3" id="left-list-ul">
                     <ul class="list-group" style="border: none" >
                         <li class="list-group-item" style="background-color: #f8fafc; border: none">
-                            <img src="img/user-default/u1.jpg" class="img-thumbnail img-circle img-responsive center-block" alt="">
-                            <div id="username" class="caption text-center">
-                                    <h3 style="font-size:20px">曾胜哲</h3>
-                                    <p>一些示例文本。用户的个性签名，用户的个性签名，用户的个性签名。</p>
+                            <div class="img-modal center-block" style="width: 130px;height:130px;">
+                                <img src="img/user-default/u1.jpg" class="img-thumbnail img-circle img-responsive portrait" alt=""/>
+                            </div>
+                            <div class="caption text-center">
+                                    <h3 style="font-size:20px" class="account">用户的账号</h3>
+                                    <p class="signature">一些示例文本。用户的个性签名，用户的个性签名，用户的个性签名。</p>
                             </div>
                             <h5 class="page-header mt-1 mb-1 pb-1"></h5>
                         </li>
@@ -70,89 +113,68 @@
                             个人信息
                             <span class="glyphicon glyphicon-chevron-right pull-right"></span>
                         </li>
-                        <li class="list-group-item text-center list-group-item-style">
-                            最近浏览
-                            <span class="glyphicon glyphicon-chevron-right pull-right"></span>
-                        </li>
-                        <li class="list-group-item text-center list-group-item-style">
+                        <li class="list-group-item text-center list-group-item-style" id="mySubscribe">
                             我的订阅
                             <span class="glyphicon glyphicon-chevron-right pull-right"></span>
                         </li>
+                        <div>
+                            <a class="list-group-item text-center list-group-item-style text-success" href="index.html">
+                                <span class="glyphicon glyphicon-chevron-left pull-left"></span>
+                                <p style="text-indent: -30px;">返回主页</p>
+                            </a>
+                        </div>
                     </ul>
                 </div>
                 <!--左边列表组  end-->
 
                 <!--右边各功能具体显示-->
                 <div class="col-lg-9">
-                    
                     <!--个人信息模块-->
                     <div class="right-modal-display">
-                        <p class="mt-3" style="font-size: 18px;font-weight:700;">个人信息</p>
-                        <hr style="border: 1px solid  #dadde0;">
-                        <div class="info-box" style="width: 100%;height:80px;">
-                            <label class="text-center well pull-left" style="border: none;width: 120px;">昵称</label>
-                            <div class="pull-left person-info-style">LWGGGGGG
-                                <button class="btn pull-right" data-toggle="modal" data-target="#myModalNICKNAME">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </button>
-                            </div>
-                        </div>
-                        <!-- 按pencil图标的按钮触发修改昵称模态框 -->
-                        <!-- 修改昵称模态框（Modal） -->
-                        <div class="modal fade" id="myModalNICKNAME" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <p class="mt-3" style="font-size: 18px;font-weight:700;">个人信息
+                            <button class="btn pull-right" data-toggle="modal" data-target="#myModalUserImg">更换头像</button>
+                        </p>
+                        <!-- 点击更换头像弹出模态框 -->
+                        <!-- 更换头像模态框（Modal） -->
+                        <div class="modal fade" id="myModalUserImg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h4 class="modal-title" id="myModalLabel">修改昵称</h4>
+                                        <h4 class="modal-title">更换头像</h4>
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                     </div>
-                                    <div class="modal-body">
-                                        <input id="nickname" class="form-control" type="text" placeholder="请输入昵称" />
+                                    <div class="img-modal center-block" style="width: 130px;height:130px;">
+                                        <img src="img/user-default/u1.jpg" class="img-thumbnail img-circle img-responsive portrait" alt="" id="imgPreSee"/>
+                                    </div>
+                                    <div class="modal-body text-center">
+                                        <button type="button" class="btn btn-link mb-4" style="text-decoration: none;" id="preViewPortrait">换一换</button>
+                                        <form id="formTag" enctype="multipart/form-data">
+                                            <a href="#" class="fileBox" style="text-decoration: none;">上传
+                                        　　　　<input type="file" name="pictureFile" id="uploadPortrait"/>
+                                            </a>
+                                        </form>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                        <button type="button" class="btn btn-primary">提交更改</button>
+                                        <button type="button" class="btn btn-primary" id="changePortrait" data-dismiss="modal">提交更改</button>
                                     </div>
                                 </div><!-- /.modal-content -->
                             </div><!-- /.modal-dialog -->
                         </div><!-- Modal end-->
+                        <hr style="border: 1px solid  #dadde0;">
+                        <!--账号不能改，不给他设置修改的弹出框-->
                         <div class="info-box" style="width: 100%;height:80px;">
                             <label class="text-center well pull-left" style="border: none;width: 120px;">账号</label>
-                            <div class="pull-left person-info-style">这里是用户的账号</div>
+                            <div class="pull-left person-info-style account">这里是用户的账号</div>
                         </div>
+                        <!--密码可以改，不给他设置修改的弹出框-->
                         <div class="info-box" style="width: 100%;height:80px;">
                             <label class="text-center well pull-left" style="border: none;width: 120px;">密码</label>
-                            <div class="pull-left person-info-style">********
-                                <!-- <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
-                                <a href="#"><span class="glyphicon glyphicon-eye-open pull-right">&emsp;</span></a> -->
-                                <button class="btn pull-right" data-toggle="modal" data-target="#myModalPWD">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </button>
-                                <button class="btn pull-right" data-toggle="modal" data-target="#myModalSEEPWD">
-                                    <span class="glyphicon glyphicon-eye-open pull-right"></span>
-                                </button>
-                            </div>
+                            <div class="pull-left person-info-style password">这里是用户的密码</div>
+                            <button class="btn pull-right" data-toggle="modal" data-target="#myModalPWD">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </button>
                         </div>
-                        <!-- 按eye图标的按钮触发查看密码模态框 -->
-                        <!-- 查看密码模态框（Modal） -->
-                        <div class="modal fade" id="myModalSEEPWD" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title" id="myModalLabel">查看密码</h4>
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    </div>
-                                    <div class="modal-body">
-                                        为了您的账号安全，我们已经给您的手机号18570493846发送了一条短信，请输入接受到的验证码
-                                        <input id="" class="form-control" type="text" placeholder="请输入验证码" />
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                        <button type="button" class="btn btn-primary">验证</button>
-                                    </div>
-                                </div><!-- /.modal-content -->
-                            </div><!-- /.modal-dialog -->
-                        </div><!-- Modal end-->
                         <!-- 按pencil图标的按钮触发修改密码模态框 -->
                         <!-- 修改密码模态框（Modal） -->
                         <div class="modal fade" id="myModalPWD" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -167,18 +189,18 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                        <button type="button" class="btn btn-primary">提交更改</button>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">提交更改</button>
                                     </div>
                                 </div><!-- /.modal-content -->
                             </div><!-- /.modal-dialog -->
                         </div><!-- Modal end-->
+                        <!--个性签名可以改-->
                         <div class="info-box" style="width: 100%;height:80px;">
                             <label class="text-center well pull-left" style="border: none;width: 120px;">个性签名</label>
-                            <div class="pull-left person-info-style">这里是用户的个性签名
-                                <button class="btn pull-right" data-toggle="modal" data-target="#myModalsignature">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </button>
-                            </div>
+                            <div class="pull-left person-info-style signature">这里是用户的个性签名</div>
+                            <button class="btn pull-right" data-toggle="modal" data-target="#myModalsignature">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </button>
                         </div>
                         <!-- 按pencil图标的按钮触发修改个性签名模态框 -->
                         <!-- 修改个性签名模态框（Modal） -->
@@ -186,15 +208,15 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h4 class="modal-title" id="myModalLabel">修改个性签名</h4>
+                                        <h4 class="modal-title">修改个性签名</h4>
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                     </div>
                                     <div class="modal-body">
-                                        <input id="" class="form-control" type="text" placeholder="请输入个性签名" />
+                                        <input id="newSignature" class="form-control" type="text" placeholder="请输入个性签名" />
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                        <button type="button" class="btn btn-primary">提交更改</button>
+                                        <button type="button" class="btn btn-primary" id="changeSignature" data-dismiss="modal">提交更改</button>
                                     </div>
                                 </div><!-- /.modal-content -->
                             </div><!-- /.modal-dialog -->
@@ -202,42 +224,104 @@
                     </div>
                     <!--个人信息模块 end-->
 
-                    <!--最近浏览模块-->
-                    <!-- style="display: none;" -->
-                    <div class="right-modal-display">
-                        <p class="mt-3" style="font-size: 18px;font-weight:700;">最近浏览</p>
-                        <hr style="border: 1px solid  #dadde0;">
-                        <div class="not-conts">
-                            您最近没有浏览任何课程，可以先去
-                            <a href="#" class="find-course">去找找课程</a>
-                        </div>
-                    </div>
-                    <!--最近浏览模块 end-->
-
                     <!--课程订阅模块-->
                     <!-- style="display: none;" -->
                     <div class="right-modal-display">
                         <p class="mt-3" style="font-size: 18px;font-weight:700;">我的订阅</p>
                         <hr style="border: 1px solid  #dadde0;">
-                        <div class="not-conts">
+                        <div class="not-conts-subscribe" style="display: none;">
                             您没有订阅任何课程，可以先去
-                            <a href="#" class="find-course">去找找课程</a>
+                            <a href="course.html" class="find-course">去找找课程</a>
+                        </div>
+                        <div class="have-conts-subscribe">
+                            <!--订阅课程循环展示,通过ajax填充-->
                         </div>
                     </div>
                     <!--课程订阅模块 end-->
                 </div>
                 <!--右边各功能具体显示  end-->
-
             </div>
         </div>
 
         <!-- 自己写的jQuery -->
         <script>
-            
+      		//先将个人信息都展示出来
             $(function(){
+                $.ajax({
+                    url:"enterPersonalCenter.do",
+                    type:"post",
+                    success:function(res){
+                        for (key in res) {
+                            if(key=="portrait"){
+                                $('.'+key).attr("src",res[key]);
+                            } else{
+                                $('.'+key).html(res[key]);
+                            }
+                        }
+                    }
+                });
+            });
 
+            $(function(){
                 // 先加载右边的个人信息板块
                 $(".right-modal-display").eq(0).show().siblings().hide();
+                //点击我的订阅时发送ajax请求数据
+                $('#mySubscribe').click(getSubscribelist());
+
+                function getSubscribelist(){
+                    $.ajax({
+                        url:"getMySubscribe.do",
+                        type:"post",
+                        success:function(res){
+                            if(res.length>0){
+                                //有订阅课程集合返回，循环遍历集合  
+                                $(".have-conts-subscribe").html("");
+                                for (var i = 0; i < res.length; i++) {
+                                    //一个课程的HTML
+                                    var html = "<div class='subscribe-item'>"+
+                                                    "<img src='img/html.jpg' class='small-info-div'/>"+
+                                                    "<div class='small-info-div'>"+
+                                                        "<h4>"+res[i].cname+"</h4>"+
+                                                        "<h6>"+res[i].cauthor+"</h6>"+
+                                                        "<h6>"+res[i].cdesc+"</h6>"+
+                                                    "</div>"+
+                                                    "<div style='width: 100%;height:30px;'>"+
+                                                        "<div class='pull-left text-center' style='height: 30px;width:40px;'>免费</div>"+
+                                                        "<div class='pull-right text-center text-primary subscribe-cancel' style='height: 30px;width:70px;'>"+
+                                                            "<input type='hidden' value="+res[i].cid+">"+
+                                                            "<span class='glyphicon glyphicon-star'></span><strong>已订阅</strong>"+
+                                                        "</div>"+
+                                                    "</div>"+
+                                                "</div>";
+                                    //将一个课程的html放到订阅课程展示页面
+                                    $(".have-conts-subscribe").append(html);
+                                }
+                                $('.have-conts-subscribe').show();
+                                $('.not-conts-subscribe').hide();
+                            } else{
+                                //没有订阅课程集合返回
+                                $('.have-conts-subscribe').show();
+                                $('.not-conts-subscribe').show();
+                            }
+                        }
+                    });
+                };
+
+                //取消订阅
+                $(document).on('click','.subscribe-cancel',function () {
+                    var cid = $(this).children('input').val();
+                    $.ajax({
+                        url:"cancelSubscribeCourse.do",
+                        data:{"cid":cid},
+                        type:"post",
+                        success:function(res){
+                            if(res==1){
+                                getSubscribelist();
+                            }
+                        }
+                    });
+                });
+
 
                 // 点击左边列表中的不同li，右边的板块也会对应变化
                 $("#left-list-ul>ul>li:gt(0)").mouseover(function(){
@@ -249,10 +333,88 @@
                     $(this).siblings().removeClass('list-single-info-display');
                     var index = $(this).index()-1;
                     $(".right-modal-display").eq(index).show().siblings().hide();
-                })
+                });
+                
+                //修改个性签名
+                $('#changeSignature').click(function(){
+                    var newSignature = $('#newSignature').val();
+                    $.ajax({
+                        url:"changeSignature.do",
+                        data:{"signature":newSignature},
+                        type:"post",
+                        success:function(res){
+                            if(res==1){
+                                $('.signature').html(newSignature);
+                            }
+                        }
+                    });
+                });
+              
+                //换一换头像,预览
+                $('#preViewPortrait').click(function(){
+                    $.ajax({
+                        url:"preViewPortrait.do",
+                        type:"post",
+                        success:function(res){
+                            $('#imgPreSee').attr('src',res);
+                        }
+                    });
+                });
+
+                //上传头像前，预览图片
+                $('#uploadPortrait').change(function(e) {
+                    var imgTag = e.target;
+                    preSeeUploadImg($('#imgPreSee'), imgTag)
+                });
+                function preSeeUploadImg(element, tag) {
+                    var file = tag.files[0];
+                    var imgSrc;
+                    if (!/image\/\w+/.test(file.type)) {
+                        alert("请上传图片文件");
+                        return false;
+                    }
+                    var reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = function() {
+                        imgSrc = this.result;
+                        element.attr("src", imgSrc);
+                    };
+                }
+
+                //更换头像，写入dao层
+                $('#changePortrait').click(function(){
+                    //判断是换一换的图片，还是上传的图片
+                    var flag = $('#imgPreSee').attr('src').substr(18,1);
+                    if(flag>=1&&flag<=4){
+                        //换一换的
+                        var portrait = $('#imgPreSee').attr('src');
+                        $.ajax({
+                            url:"changePortraitRandom.do",
+                            data:{"portrait":portrait},
+                            type:"post",
+                            success:function(res){
+                                if(res==1)
+                                $('.portrait').attr('src',portrait);
+                            }
+                        });
+                    } else {
+                        //上传的
+                        $.ajax({
+                            url: "changePortraitUpload.do",
+                            type: "post",
+                            cache: false,
+                            data: new FormData($("#formTag")[0]),
+                            processData: false,// 不处理数据
+                            contentType: false, // 不设置内容类型
+                            success: function(res){
+                                $(".portrait").attr("src",res);
+                            }
+                        });
+
+                    }
+                });
             });
         </script>
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        
     </body>
 </html>
