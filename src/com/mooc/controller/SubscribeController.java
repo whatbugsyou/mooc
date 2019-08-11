@@ -17,13 +17,13 @@ public class SubscribeController {
 	private SubscribeService subscribeService;
 	
 	/**
-	 * ²é¿´ÎÒµÄ¶©ÔÄ
-	 * @return ·µ»Øµ±Ç°ÓÃ»§µÄ¶©ÔÄÊÓÆµ¼¯ºÏ 
-	 * @author ¹ú¹ú
+	 * ï¿½é¿´ï¿½ÒµÄ¶ï¿½ï¿½ï¿½
+	 * @return ï¿½ï¿½ï¿½Øµï¿½Ç°ï¿½Ã»ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ 
+	 * @author ï¿½ï¿½ï¿½ï¿½
 	 */
 	@PostMapping("/getMySubscribe.do")
 	public @ResponseBody List<Course> getMySubscribe() {
-//		´ÓsessionÖÐÈ¡³öÀ´userÐÅÏ¢
+//		ï¿½ï¿½sessionï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½userï¿½ï¿½Ï¢
 //		User user = request.getSession().getAttribute("user");	
 		List<Course> courseList = subscribeService.getSubscribeCourseList(1);
 		System.out.println(courseList);
@@ -32,14 +32,14 @@ public class SubscribeController {
 	
 	
 	/**
-	 * È¡ÏûÄ³¸ö¶©ÔÄµÄÊÓÆµ
-	 * @param ´«ÈëÒ»¸ö¿Î³Ìid
-	 * @return È¡Ïû³É¹¦·µ»Ø1
-	 * @author ¹ú¹ú
+	 * È¡ï¿½ï¿½Ä³ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½Æµ
+	 * @param ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Î³ï¿½id
+	 * @return È¡ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½1
+	 * @author ï¿½ï¿½ï¿½ï¿½
 	 */
 	@PostMapping("/cancelSubscribeCourse.do")
 	public @ResponseBody int cancelSubscribeCourse(int cid) {
-//		´ÓsessionÖÐÈ¡³öÀ´userÐÅÏ¢
+//		ï¿½ï¿½sessionï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½userï¿½ï¿½Ï¢
 //		User user = request.getSession().getAttribute("user");	
 		if (subscribeService.cancelSubscribe(cid,1)==1) {
 			return 1;
