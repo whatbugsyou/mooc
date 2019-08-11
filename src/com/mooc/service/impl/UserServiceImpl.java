@@ -1,5 +1,7 @@
 package com.mooc.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,5 +32,16 @@ public class UserServiceImpl implements UserService {
 			return true;
 		}
 		return false;
+	}
+	@Override
+	public List<User> selectAllUser() {
+		// TODO Auto-generated method stub
+		return userMapper.selectAllUser();
+	}
+
+	@Override
+	public int deleteUserById(int uid) {
+		// TODO Auto-generated method stub
+		return userMapper.deleteUserById(uid);
 	}
 }

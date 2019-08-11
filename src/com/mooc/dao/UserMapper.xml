@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mooc.dao.UserMapper">
+	
+  <!-- 查询所有用户 -->
+  <select id="selectAllUser" resultType="user">
+  	select * from user
+  </select>
+  
+  <delete id="deleteUserById" parameterType="int">
+  	delete from user
+  	<where>
+  		uid = #{uid}
+  	</where>
+  </delete>
+
+</mapper>

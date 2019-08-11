@@ -8,8 +8,20 @@ public class Video {
     private String vepisode;
 
     private String vaddress;
+    
+    private Integer cid;
 
-    public Integer getVid() {
+    
+
+	public Integer getCid() {
+		return cid;
+	}
+
+	public void setCid(Integer cid) {
+		this.cid = cid;
+	}
+
+	public Integer getVid() {
         return vid;
     }
 

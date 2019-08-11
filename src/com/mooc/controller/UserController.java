@@ -1,5 +1,7 @@
 package com.mooc.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +40,19 @@ public class UserController {
 	public @ResponseBody  User isLogin(HttpServletRequest req) {
 		User user = (User) req.getSession().getAttribute("user");
 		return user;
+	}
+	@RequestMapping("selectAllUser.do")
+	@ResponseBody
+	public List<User> selectAllUser(){
+		List<User> users = userService.selectAllUser();
+		System.out.println(users);
+		return users;
+	}
+	
+	@RequestMapping("deleteUserById.do")
+	@ResponseBody
+	public int deleteUserById(int uid){
+		int column = userService.deleteUserById(uid);
+		return column;
 	}
 }

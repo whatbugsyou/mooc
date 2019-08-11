@@ -1,0 +1,711 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--2.引入主题样式-->
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/vue.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        body p div {
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+
+        .showlist {
+            text-align: center;
+            border-left: none;
+            border-right: none;
+        }
+    </style>
+
+    <script>
+        $(function () {
+            //加载顶部
+            $("#top").load("navbar.html");
+
+            $("#person_management").click(function () {
+                //其他几个页面显示影藏
+                $("#user_view").css("display", "none");
+                $("#videos-view").css("display", "none");
+            });
+            //加载用户管理页面
+            $("#user_management").click(function () {
+                $("#user_view").css("display", "block");//显示
+                //其他影藏
+                $("#videos-view").css("display", "none");
+
+            });
+            //加载课程管理页面
+            //$("#course_management").click(function(){
+            // $("#user_view").css("display", "none");
+            // alert("hide person_management view");
+            // $("#videos-view").css("display", "block");
+            //查询所有的课程
+            // $.ajax({
+            //     url:"selectAllCourse.do",
+            //     type:"POST",
+            //     success:function(List){
+            //          $.each(List, function (i, obj) {
+            //             for (key in obj) {
+            //                 alert(key + ":" + obj[key])
+            //             }
+            //         })
+            //     }
+            // })
+            //})
+        });
+    </script>
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <div class="container-fluid" id="app">
+        <div class="row">
+            <div id="top" style="width: 100%;height: 100px;">
+
+            </div>
+        </div>
+        <!--左侧部分-->
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div id="left-menu" class="col-md-2" style="height: 600x">
+                <div id="profile" class="row" style="height: 150px;background-color: #f7fafc">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <img src="img/profile.png" class="img-circle" alt="profile"
+                                style="width: 110px;height: 100px;margin-left: 60px;margin-top: 20px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="height: 50px;background-color: #f7fafc">
+                    <div class="col-md-12 text-center">
+                        <p>hsmanzsz</p>
+                        <p style="margin-top: -16px">ID:88888</p>
+                    </div>
+                </div>
+
+
+                <!--导航-->
+                <div class="row" style="height: 300px;background-color: #f7fafc">
+                    <div class="col-md-12 mt-5">
+                        <div class="list-group" style="background-color: #f7fafc">
+                            <a href="#" id="person_management"
+                                class="showlist list-group-item list-group-item-action">个人中心</a>
+                            <a href="#" id="user_management" class="showlist list-group-item list-group-item-action"
+                                @click="showUsers">用户管理</a>
+                            <a href="#" id="course_management" class="showlist list-group-item list-group-item-action"
+                                @click="show">课程管理</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--间隔-->
+            <div class="col-md-1" style="height: 500x"></div>
+            <!--显示主体-->
+            <div id="right-main" class="col-md-8" style="height: 800px;">
+
+                <!--视频展示展示-->
+                <div id="videos-show" style="display: none">
+                    <div class="row">
+                        <div class="col-md-12 mt-5">
+                            <p style="font-size: 24px">视频展示</p>
+                            <hr style="border: solid 1px #d0d6d9">
+                        </div>
+                    </div>
+                    <div class="row mt-5" style="height: 100%">
+                        <div class="col-md-12">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>id</th>
+                                        <th>名称</th>
+                                        <th>第几集</th>
+                                        <th>地址</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(v,index) in videos" :key="v.vid">
+                                        <td><input type="checkbox"></td>
+                                        <td>{{v.vid}}</td>
+                                        <td>{{v.vname}}</td>
+                                        <td>{{v.vepisode}}</td>
+                                        <td>{{v.vaddress}}</td>
+                                        <td><button @click="deleteVideoByVid(v.vid,index)" type="button" class="btn btn-primary">删除</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <button id="selectAll" type="button" class="btn btn-warning">全选</button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger">删除</button>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!--课程管理 -->
+                <div id="course-management" style="display: none">
+                    <div class="row">
+                        <div class="col-md-12 mt-5">
+                            <p style="font-size: 24px">课程管理</p>
+                            <hr style="border: solid 1px #d0d6d9">
+                        </div>
+                    </div>
+                    <div class="row mt-3 " style="height: 100%">
+                        <!-- 上传课程-->
+                        <div style="width: 400px;height: 400px;border: solid 1px transparent;margin-left: 50px">
+                            <form action="" method="POST" enctype="multipart/form-data" class="mt-5">
+                                <div class="form-group row">
+                                    <label for="k" class="col-md-4 mt-1 text-center">课程名</label>
+                                    <input type="text" name="" id="k" class="form-control col-md-6" placeholder="课程名"
+                                        aria-describedby="helpId">
+                                </div>
+                                <div class="form-group row">
+                                    <label for="" class="col-md-4 mt-1 text-center">课程描述</label>
+                                    <input type="text" name="" id="" class="form-control col-md-6" placeholder=""
+                                        aria-describedby="helpId">
+                                </div>
+                                <div class="form-group row">
+                                    <label for="" class="col-md-4 mt-1 text-center">上传作者</label>
+                                    <input type="text" name="" id="" class="form-control col-md-6" placeholder=""
+                                        aria-describedby="helpId">
+                                </div>
+                                <div class="form-group row">
+                                    <label for="" class="col-md-4 mt-1 text-center">上传时间</label>
+                                    <input type="date" name="" id="" class="form-control col-md-6" placeholder=""
+                                        aria-describedby="helpId">
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="" class="col-md-4 mt-1 text-center">课程类型</label>
+                                    <select class="form-control col-md-6" name="" id="">
+                                        <option>选择类型</option>
+                                        <option>java</option>
+                                        <option>c++</option>
+                                        <option>vue</option>
+                                    </select>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3"></div>
+                                    <div class="col-md-6">
+                                        <button type="button" class="btn btn-default" aria-label="Left Align">
+                                            <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--视频管理-->
+                <div id="videos-view" style="display:none">
+                    <div class="row">
+                        <div class="col-md-12 mt-5">
+                            <p style="font-size: 24px">课程管理</p>
+                            <hr style="border: solid 1px #d0d6d9">
+                        </div>
+                    </div>
+                    <div class="row mt-5" style="height: 100%">
+                        <div class="col-md-12">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>课程ID</th>
+                                        <th>课程名</th>
+                                        <th>作者</th>
+                                        <th>视频管理</th>
+                                        <th>查看课程视频</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!--循环遍历集合-->
+                                    <tr v-for="c in course" :key="c.cid" :style="{'display':flag}">
+                                        <td scope="row">{{c.cid}}</td>
+                                        <td>{{c.cname}}</td>
+                                        <td>{{c.cauthor}}</td>
+                                        <td>
+                                            <button @click="uploadBtn(c.cid)" type="button"
+                                                class="btn btn-primary btn-xs" data-toggle="modal"
+                                                data-target="#videom">
+                                                上传视频
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button @click="findVideosById(c.cid)" type="button" class="btn btn-primary btn-xs">
+                                                查看课程视频
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#coursem">
+                                                添加课程
+                                            </button>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+
+                                    <!-- 添加课程Modal -->
+                                    <!-- <div class="modal fade" id="modelId" tabindex="-1" role="dialog"
+                                        aria-labelledby="modelTitleId" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">课程修改</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="container">
+                                                        <form action="" method="POST" class="mt-5">
+                                                            <div class="form-group row">
+                                                                <label for="k"
+                                                                    class="col-md-4 mt-1 text-center">课程名</label>
+                                                                <input type="text" name="" id="k"
+                                                                    class="form-control col-md-6" placeholder="课程名"
+                                                                    aria-describedby="helpId">
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label for=""
+                                                                    class="col-md-4 mt-1 text-center">课程描述</label>
+                                                                <input type="text" name="" id=""
+                                                                    class="form-control col-md-6" placeholder=""
+                                                                    aria-describedby="helpId">
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label for=""
+                                                                    class="col-md-4 mt-1 text-center">上传作者</label>
+                                                                <input type="text" name="" id=""
+                                                                    class="form-control col-md-6" placeholder=""
+                                                                    aria-describedby="helpId">
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label for=""
+                                                                    class="col-md-4 mt-1 text-center">上传时间</label>
+                                                                <input type="date" name="" id=""
+                                                                    class="form-control col-md-6" placeholder=""
+                                                                    aria-describedby="helpId">
+                                                            </div>
+
+                                                            <div class="form-group row">
+                                                                <label for=""
+                                                                    class="col-md-4 mt-1 text-center">课程类型</label>
+                                                                <select class="form-control col-md-6" name="" id="">
+                                                                    <option>选择类型</option>
+                                                                    <option>java</option>
+                                                                    <option>c++</option>
+                                                                    <option>vue</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-3"></div>
+                                                                <div class="col-md-6">
+                                                                    <button type="button" class="btn btn-default"
+                                                                        aria-label="Left Align">
+                                                                        <span class="glyphicon glyphicon-align-left"
+                                                                            aria-hidden="true"></span>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">关闭</button>
+                                                    <button type="button" class="btn btn-primary">修改</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+
+                                    <!-- <script>
+                                        $('#exampleModal').on('show.bs.modal', event => {
+                                            var button = $(event.relatedTarget);
+                                            var modal = $(this);
+                                            // Use above variables to manipulate the DOM
+
+                                        });
+                                    </script> -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- 添加课程Modal -->
+                <div class="modal fade" id="coursem" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">添加课程</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container">
+                                    <form action="" method="POST" class="mt-5">
+                                        <div class="form-group row">
+                                            <label for="k" class="col-md-4 mt-1 text-center">课程名</label>
+                                            <input type="text" v-model:value="cname" name="cname" id="k" class="form-control col-md-6" placeholder="课程名"
+                                                aria-describedby="helpId">
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="" class="col-md-4 mt-1 text-center">课程描述</label>
+                                            <input type="text"  v-model:value="cdesc" name="cdesc" id="" class="form-control col-md-6" placeholder=""
+                                                aria-describedby="helpId">
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="" class="col-md-4 mt-1 text-center">上传作者</label>
+                                            <input type="text"  v-model:value="cauthor" name="cauthor" id="" class="form-control col-md-6" placeholder=""
+                                                aria-describedby="helpId">
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="" class="col-md-4 mt-1 text-center">上传时间</label>
+                                            <input type="date"  v-model:value="cuploadtime" name="cuploadtime" id="" class="form-control col-md-6" placeholder=""
+                                                aria-describedby="helpId">
+                                        </div>
+                
+                                        <div class="form-group row">
+                                            <label for="" class="col-md-4 mt-1 text-center">课程类型</label>
+                                            <select class="form-control col-md-6" name="ctid" v-model:value="ctid">
+                                                <option>选择类型</option>
+                                                <option value="1">java</option>
+                                                <option value="2">c++</option>
+                                                <option value="3">vue</option>
+                                            </select>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3"></div>
+                                            <div class="col-md-6">
+                                                <button type="button" class="btn btn-default" aria-label="Left Align">
+                                                    <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                                <button @click="addCourse" type="button" class="btn btn-primary">添加</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 视频上传Modal -->
+                <div class="modal fade" id="videom" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                                <div class="modal-header">
+                                        <h5 class="modal-title">上传视频</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                    </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <div class="container">
+                                        <form action="addVideo.do" method="POST" enctype="multipart/form-data">
+                                                <div class="form-group row">
+                                                    <label class="col-md-4 mt-1 text-center">标题</label>
+                                                    <input type="text" name="vname" class="form-control col-md-6" placeholder="课程名" aria-describedby="helpId">
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-md-4 mt-1 text-center">第几集</label>
+                                                    <input type="text" name="vepisode" class="form-control col-md-6" placeholder="" aria-describedby="helpId">
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-md-4 mt-1 text-center">视频</label>
+                                                    <input type="file" class="form-control-file col-md-6" name="pfile" placeholder="选择视频"
+                                                        aria-describedby="fileHelpId">
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-md-4 mt-1 text-center">课程ID</label>
+                                                    <input type="text" v-model:value="TempCid" name="cid" class="form-control col-md-6" placeholder="课程名"
+                                                        aria-describedby="helpId">
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="offset-sm-2 col-sm-10">
+                                                        <button type="submit" class="btn btn-primary">上传</button>
+                                                    </div>
+                                                </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <script>
+                    $('#exampleModal').on('show.bs.modal', event => {
+                        var button = $(event.relatedTarget);
+                        var modal = $(this);
+                        // Use above variables to manipulate the DOM
+                        
+                    });
+                </script>
+
+                <!--用户视图-->
+                <div id="user_view" style="display: none">
+                    <div class="row">
+                        <div class="col-md-12 mt-5">
+                            <p style="font-size: 24px">用户管理</p>
+                            <hr style="border: solid 1px #d0d6d9">
+                        </div>
+                    </div>
+                    <div class="row mt-5" style="height: 100%">
+                        <div class="col-md-12">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>用户ID</th>
+                                        <th>用户名</th>
+                                        <th>密码</th>
+                                        <th>个性签名</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(user,index) in users" key="users.uid" :style="{'display':userflag}">
+                                        <th><input type="checkbox" /></th>
+                                        <td>{{user.uid}}</td>
+                                        <td>{{user.account}}</td>
+                                        <td>{{user.password}}</td>
+                                        <td>{{user.signature}}</td>
+                                        <td><button @click="deleteUserById(user.uid,index)" type="button" class="btn btn-primary">删除</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <button id="selectAll" type="button" class="btn btn-warning">全选</button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger">删除</button>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        //全选
+        $(function () {
+            $("#selectAll").click(function () {
+                $("tbody input").attr("checked", "checked");
+            });
+        });
+        //删除
+        $(function () {
+            $("tbody button").click(function () {
+                //ajax 请求 
+                $.ajax({
+                    url: '',
+                    data: {
+                        var: this.val()
+                    },
+                    type: "POST",
+                    success: function (result) {
+                        //返回新的集合
+                    }
+                })
+            })
+        })
+    </script>
+    <!--课程部分-->
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                flag: 'none',
+                userflag: 'none',
+                course: [{ 'cid': '', 'cname': '', 'cdesc': '', 'cplayvolume': '', 'cauthor':'', 'cuploadtime':'', 'ctid': '' },],
+                users: [{ 'uid': '', 'accout': 'password', 'portrait': '', 'signature': '' }],
+                videos:[{'vid':'','vname':'','vepisode':'','vaddress':'','cid':''}],
+                //添加课程时的表单中的内容。
+                cname:'',
+                cdesc:'',
+                cplayvolume:'',
+                cauthor:'',
+                cuploadTime:'',
+                ctid:'',
+                TempCid: 0
+            },
+            methods: {
+                //删除用户
+                deleteUserById:function(uid,index){
+                    $.ajax({
+                        url:'deleteUserById.do',
+                        data:{
+                            "uid":uid
+                        },
+                        success:(column)=>{
+                            if(column>0){
+                                this.users.splice(index, 1);
+                            }
+                        }
+                    })
+                },
+                //添加课程信息
+                addCourse:function(){
+                    //控制层
+                    $.ajax({
+                        url:"addCourse.do",
+                        data:{
+                            "cname":this.cname,
+                            "cdesc":this.cdesc,
+                            "cauthor":this.cauthor,
+                            "cuploadtime":this.cuploadtime,
+                            "ctid":this.ctid
+                        },
+                        success:(res)=>{
+                            if(res>0){
+                                alert("添加成功！");
+                                this.course.push(
+                                    {
+                                        "cname": this.cname,
+                                        "cdesc": this.cdesc,
+                                        "cplayvolume":this.cplayvolume,
+                                        "cauthor": this.cauthor,
+                                        "cuploadtime": this.cuploadtime,
+                                        "ctid": this.ctid
+                                    }
+                                )
+                            }
+                        }
+                    })
+
+                },
+                //查看所有课程下的所有视频
+                findVideosById: function(cid){
+                    $("#videos-view").css("display", "none");
+                    $("#user_view").css("display", "none");
+                    $("#videos-show").css("display", "block");
+                    $.ajax({
+                        url:"findAllVideo.do",
+                        data:{
+                            "cid":cid
+                        },
+                        success:(res)=>{
+                            //接收到所有的视频的信息
+                            this.videos=res;
+                            //遍历一下
+                            //  $.each(res, function (i, obj) {
+                            //     for (key in obj) {
+                            //         alert(key + ":" + obj[key])
+                            //     }
+                            // })
+                        }
+                    })
+                },
+                //根据视频id删除视频
+                deleteVideoByVid: function(vid,index){
+                    $.ajax({
+                        url:"deleteVideoByVid.do",
+                        data:{
+                            "vid":vid
+                        },
+                        success:(res)=>{
+                            //返回值是一个视频的对象如果这个对象不为空则移除
+                            //将视频对象移除videos集合
+                            if(res>0){
+                                this.videos.splice(index,1);
+                            }
+                        }
+                    })
+                },
+                //查询所有的课程
+                show: function () {
+                    $("#user_view").css("display", "none");
+                    $("#videos-show").css("display", "none");
+                    $("#videos-view").css("display", "block");
+                    
+                    $.ajax({
+                        url: "selectAllCourse.do",
+                        type: "POST",
+                        success: (list) => {
+                            this.course = list;
+                            if (list.length > 0) {
+                                this.flag = 'table-row';
+                            }
+                        }
+                    })
+                },
+                //点击视频管理按钮
+                uploadBtn: function (cid) {
+                    //绑定一个值
+                    this.TempCid = cid;
+                },
+
+                //查询所有的用户
+                showUsers: function () {
+                    //其他影藏
+                    $("#videos-view").css("display", "none");
+                    $("#videos-show").css("display", "none");
+                    //显示
+                    $("#user_view").css("display", "block");
+                    $.ajax({
+                        url: 'selectAllUser.do',
+                        type: "POST",
+                        success: (res) => {
+                            this.users = res;
+                            if (res.length > 0) {
+                                this.userflag = 'table-row';
+                            }
+                        }
+                    })
+                }
+            }
+        })
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

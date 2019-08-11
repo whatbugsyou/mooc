@@ -11,7 +11,10 @@ import com.mooc.entity.Video;
 @Repository
 public interface CourseMapper {
 
-
+	List<Course> selectAllCourse();
+	
+	int addCourse(Course course);
+	
 	List<Course> selectLikeCname(String name);
 
 	List<Course> selectAll();
