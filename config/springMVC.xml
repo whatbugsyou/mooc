@@ -41,5 +41,9 @@
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
         <!--如果所有页面的跳转路径前面一部分和后缀相同加去掉前缀和后缀由视图解析器统一添加
 		 <property name="prefix" value="jsp/"></property><property name="suffix" value=".jsp"></property> -->
-    </bean>
+    </bean>	
+	<!-- 注册文件上传解析器 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="1024000"></property>
+	</bean>
 </beans>

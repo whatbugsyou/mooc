@@ -8,6 +8,9 @@ public interface UserService {
 
 	boolean login(User user);
 
+	User enterPersonalCenter();
+
+	int changeUser(User user);
 	boolean register(User user);
 	List<User> selectAllUser();
 

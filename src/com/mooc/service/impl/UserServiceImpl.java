@@ -25,6 +25,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public User enterPersonalCenter() {
+		return userMapper.selectUserByUid(1);
+	}
+
+	@Override
+	public int changeUser(User user) {
+		return userMapper.updateUser(user);
 	public boolean register(User user) {
 		User user2 = userMapper.selectUserByAccount(user.getAccount());
 		if(user2==null) {
