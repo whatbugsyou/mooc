@@ -30,4 +30,22 @@ public class VideoSerciceImpl implements VideoService {
 		Video video =videoMapper.showVideoByvid(vid);
 		 return video;
 	}
+
+	@Override
+	public int addVideo(Video v) {
+		// TODO Auto-generated method stub
+		return videoMapper.addVideo(v);
+	}
+
+	@Override
+	public List<Video> findAllVideo(int cid) {
+		// TODO Auto-generated method stub
+		return videoMapper.findAllVideo(cid);
+	}
+
+	@Override
+	public int deleteVideoByVid(int vid) {
+		// TODO Auto-generated method stub
+		return videoMapper.deleteVideoByVid(vid);
+	}
 }

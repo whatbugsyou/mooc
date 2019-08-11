@@ -19,4 +19,22 @@
 <select id="showVideoByvid" parameterType="int"  resultType="com.mooc.entity.Video" >
 	select * from video where vid = #{vid}
 </select>
+  <insert id="addVideo" parameterType="video">
+  	insert into video(vname,vepisode,vaddress,cid) 
+  	values(#{vname},#{vepisode},#{vaddress},#{cid})
+  </insert>
+  
+  <select id="findAllVideo" parameterType="int" resultType="video">
+  	select * from video
+  	<where>
+  		cid = #{cid}
+  	</where>
+  </select>
+
+  <delete id="deleteVideoByVid" parameterType="int">
+  	delete from video
+  	<where>
+  		vid = #{vid}
+  	</where>
+  </delete>
 </mapper>

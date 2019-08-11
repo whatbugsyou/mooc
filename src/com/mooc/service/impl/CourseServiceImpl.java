@@ -51,6 +51,17 @@ public class CourseServiceImpl implements CourseService{
 		return list;
 	}
 
+	@Override
+	public List<Course> SelectAllCourse() {
+		// TODO Auto-generated method stub
+		return courseMapper.selectAllCourse();
+	}
+
+	@Override
+	public int addCourse(Course course) {
+		// TODO Auto-generated method stub
+		return courseMapper.addCourse(course);
+	}
 
 
 

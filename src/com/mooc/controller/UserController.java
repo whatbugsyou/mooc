@@ -1,8 +1,11 @@
 package com.mooc.controller;
 
+import java.util.List;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +26,7 @@ public class UserController {
 	
 	@PostMapping("/login.do")
 	public @ResponseBody String login(User user,HttpServletRequest req) {
-		System.out.println("¸Õ½øÈë¿ØÖÆ²ãµÄ"+user);
+		System.out.println("ï¿½Õ½ï¿½ï¿½ï¿½ï¿½ï¿½Æ²ï¿½ï¿½"+user);
 		if(userService.login(user)) {
 			req.getSession().setAttribute("user", user);
 			return "ok";
@@ -35,14 +38,14 @@ public class UserController {
 	
 	
 	/**
-	 * ½øÈë¸öÈËÖ÷Ò³
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³
 	 * @param request
-	 * @return µ±Ç°sessionÖÐµÄuserÐÅÏ¢
-	 * @author ¹ú¹ú
+	 * @return ï¿½ï¿½Ç°sessionï¿½Ðµï¿½userï¿½ï¿½Ï¢
+	 * @author ï¿½ï¿½ï¿½ï¿½
 	 */
 	@PostMapping("/enterPersonalCenter.do")
 	public @ResponseBody User enterPersonalCenter(HttpServletRequest request) {
-		//´ÓsessionÖÐÈ¡³öÀ´userÐÅÏ¢
+		//ï¿½ï¿½sessionï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½userï¿½ï¿½Ï¢
 		User user = (User)request.getSession().getAttribute("user");
 		System.out.println(user);
 		return user;
@@ -51,14 +54,14 @@ public class UserController {
 	
 	
 	/**
-	 * ÐÞ¸Ä¸öÐÔÇ©Ãû
+	 * ï¿½Þ¸Ä¸ï¿½ï¿½ï¿½Ç©ï¿½ï¿½
 	 * @param signature
-	 * @return ÐÞ¸Ä³É¹¦·µ»Ø1
-	 * @author ¹ú¹ú
+	 * @return ï¿½Þ¸Ä³É¹ï¿½ï¿½ï¿½ï¿½ï¿½1
+	 * @author ï¿½ï¿½ï¿½ï¿½
 	 */
 	@PostMapping("/changeSignature.do")
 	public @ResponseBody int changeSignature(String signature,HttpServletRequest request) {
-		//´ÓsessionÖÐÈ¡³öÀ´userÐÅÏ¢
+		//ï¿½ï¿½sessionï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½userï¿½ï¿½Ï¢
 		User user = (User)request.getSession().getAttribute("user");
 		user.setSignature(signature);
 		if(userService.changeUser(user)==1) {
@@ -70,9 +73,9 @@ public class UserController {
 	
 	
 	/**
-	 * »»Ò»»»Í·Ïñ£¬Ô¤ÀÀ¶øÒÑ
-	 * @return ·µ»Ø»»ÁËÍ·ÏñµÄÍ¼Æ¬Â·¾¶
-	 * @author ¹ú¹ú
+	 * ï¿½ï¿½Ò»ï¿½ï¿½Í·ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @return ï¿½ï¿½ï¿½Ø»ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½Í¼Æ¬Â·ï¿½ï¿½
+	 * @author ï¿½ï¿½ï¿½ï¿½
 	 */
 	@PostMapping("/preViewPortrait.do")
 	public @ResponseBody String preViewPortrait() {
@@ -84,13 +87,13 @@ public class UserController {
 	
 	
 	/**
-	 * È·¶¨¸ü»»Í·Ïñ(»»Ò»»»µÄ)£¬´æÈëdao²ã
-	 * @return ·µ»Ø»»ÁËÍ·ÏñµÄÍ¼Æ¬Â·¾¶
-	 * @author ¹ú¹ú
+	 * È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½(ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½daoï¿½ï¿½
+	 * @return ï¿½ï¿½ï¿½Ø»ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½Í¼Æ¬Â·ï¿½ï¿½
+	 * @author ï¿½ï¿½ï¿½ï¿½
 	 */
 	@PostMapping("/changePortraitRandom.do")
 	public @ResponseBody int changePortraitRandom(String portrait,HttpServletRequest request) {
-		//´ÓsessionÖÐÈ¡³öÀ´userÐÅÏ¢
+		//ï¿½ï¿½sessionï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½userï¿½ï¿½Ï¢
 		User user = (User)request.getSession().getAttribute("user");
 		user.setPortrait(portrait);
 		if(userService.changeUser(user)==1) {
@@ -104,27 +107,27 @@ public class UserController {
 	
 	
 	/**
-	 * È·¶¨¸ü»»Í·Ïñ(ÉÏ´«µÄ)£¬´æÈëdao²ã
-	 * @return ·µ»Ø»»ÁËÍ·ÏñµÄÍ¼Æ¬Â·¾¶
+	 * È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½(ï¿½Ï´ï¿½ï¿½ï¿½)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½daoï¿½ï¿½
+	 * @return ï¿½ï¿½ï¿½Ø»ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½Í¼Æ¬Â·ï¿½ï¿½
 	 * @throws IOException 
 	 * @throws IllegalStateException 
 	 */
 	@PostMapping("/changePortraitUpload.do")
 	public @ResponseBody String changePortraitUpload(MultipartFile pictureFile,HttpServletRequest request) throws Exception {
 		
-		// »ñÈ¡Í¼Æ¬Ô­Ê¼ÎÄ¼þÃû
+		// ï¿½ï¿½È¡Í¼Æ¬Ô­Ê¼ï¿½Ä¼ï¿½ï¿½ï¿½
         String originalFilename = pictureFile.getOriginalFilename();
-        //ÐÂÎÄ¼þÃû³Æ
+        //ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½
         String newFileName = UUID.randomUUID().toString().replace("-", "")+originalFilename.substring(originalFilename.lastIndexOf("."));           
-        // Í¼Æ¬ÉÏ´«ºó´æµ½Êý¾Ý¿âµÄÏà¶ÔÂ·¾¶
+        // Í¼Æ¬ï¿½Ï´ï¿½ï¿½ï¿½æµ½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½
         String path = "img/user-upload/"+newFileName ;
         System.out.println(path);
-        //Í¼Æ¬ÉÏ´«ºó´æ´¢µÄ¾ø¶ÔÂ·¾¶
+        //Í¼Æ¬ï¿½Ï´ï¿½ï¿½ï¿½æ´¢ï¿½Ä¾ï¿½ï¿½ï¿½Â·ï¿½ï¿½
         File uploadPic = new File("E:/GitFileTest/mooc/WebContent/img/user-upload/"+newFileName);
         if(!uploadPic.exists()) {
         	uploadPic.mkdirs();
         }
-        //Ïò´ÅÅÌÐ´ÎÄ¼þ
+        //ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½Ä¼ï¿½
         pictureFile.transferTo(uploadPic);
         
         User user = (User)request.getSession().getAttribute("user");
@@ -140,7 +143,7 @@ public class UserController {
 	@PostMapping("/register.do")
 	public @ResponseBody String register( User user) {
 		user.setPortrait("img/user-default/u1.jpg");
-		user.setSignature("»¹Ã»ÓÐÉèÖÃ¸öÐÔÇ©Ãû");
+		user.setSignature("ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½Ç©ï¿½ï¿½");
 		if(userService.register(user)) {
 			return "ok";
 		}else {
@@ -151,5 +154,19 @@ public class UserController {
 	public @ResponseBody  User isLogin(HttpServletRequest req) {
 		User user = (User) req.getSession().getAttribute("user");
 		return user;
+	}
+	@RequestMapping("selectAllUser.do")
+	@ResponseBody
+	public List<User> selectAllUser(){
+		List<User> users = userService.selectAllUser();
+		System.out.println(users);
+		return users;
+	}
+	
+	@RequestMapping("deleteUserById.do")
+	@ResponseBody
+	public int deleteUserById(int uid){
+		int column = userService.deleteUserById(uid);
+		return column;
 	}
 }

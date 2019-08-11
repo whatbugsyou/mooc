@@ -1,39 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mooc.dao.CourseMapper">
-  <resultMap id="BaseResultMap" type="com.mooc.entity.Course">
-    <id column="cid" jdbcType="INTEGER" property="cid" />
-    <result column="cname" jdbcType="VARCHAR" property="cname" />
-    <result column="cdesc" jdbcType="VARCHAR" property="cdesc" />
-    <result column="cplayvolume" jdbcType="INTEGER" property="cplayvolume" />
-    <result column="cauthor" jdbcType="VARCHAR" property="cauthor" />
-    <result column="cuploadTime" jdbcType="TIMESTAMP" property="cuploadtime" />
-    <result column="ctid" jdbcType="INTEGER" property="ctid" />
-  </resultMap>
-  
+	<resultMap id="BaseResultMap" type="com.mooc.entity.Course">
+		<id column="cid" jdbcType="INTEGER" property="cid" />
+		<result column="cname" jdbcType="VARCHAR" property="cname" />
+		<result column="cdesc" jdbcType="VARCHAR" property="cdesc" />
+		<result column="cplayvolume" jdbcType="INTEGER"
+			property="cplayvolume" />
+		<result column="cauthor" jdbcType="VARCHAR" property="cauthor" />
+		<result column="cuploadTime" jdbcType="TIMESTAMP"
+			property="cuploadtime" />
+		<result column="ctid" jdbcType="INTEGER" property="ctid" />
+	</resultMap>
 
- <select id="selectLikeCname"  parameterType="string"  resultType="com.mooc.entity.Course">
- 		select * from course where cname like concat(concat("%",#{cname}),"%")
- </select>
- <select id="selectAll"  resultType="com.mooc.entity.Course">
- 		select * from course order by 'cuploedTime' DESC
- </select>
-   <select id="selectByCplayvolume"  resultType="com.mooc.entity.Course">
- 		select * from course order by cplayvolume DESC
- </select>
-<select id="selectAllType"  resultType="com.mooc.entity.Coursetype">
-	select * from coursetype
-</select>
 
-<select id="selectCourseByCtid"  parameterType="int"  resultType="com.mooc.entity.Course">
- 		select * from course where ctid = #{ctid}
- </select>
+	<select id="selectLikeCname" parameterType="string"
+		resultType="com.mooc.entity.Course">
+		select * from course where cname like concat(concat("%",#{cname}),"%")
+	</select>
+	<select id="selectAll" resultType="com.mooc.entity.Course">
+		select * from course order by 'cuploedTime' DESC
+	</select>
+	<select id="selectByCplayvolume"
+		resultType="com.mooc.entity.Course">
+		select * from course order by cplayvolume DESC
+	</select>
+	<select id="selectAllType"
+		resultType="com.mooc.entity.Coursetype">
+		select * from coursetype
+	</select>
 
-<select id="selectVidioByCid" parameterType="int"  resultType="com.mooc.entity.Video" >
-	select * from video where cid = #{cid}
-</select>
-<update id="insertPlayColum" parameterType="int" >
-	update course set cplayvolume = cplayvolume + 1 where cid = #{cid}
-	
-</update>
+	<select id="selectCourseByCtid" parameterType="int"
+		resultType="com.mooc.entity.Course">
+		select * from course where ctid = #{ctid}
+	</select>
+
+	<select id="selectVidioByCid" parameterType="int"
+		resultType="com.mooc.entity.Video">
+		select * from video where cid = #{cid}
+	</select>
+	<update id="insertPlayColum" parameterType="int">
+		update course set cplayvolume = cplayvolume + 1 where cid = #{cid}
+
+	</update>
+	<!--zsz:1.查询所有课程 -->
+	<select id="selectAllCourse" resultType="course">
+		select * from course
+	</select>
+
+	<insert id="addCourse" parameterType="course">
+		insert into
+		course(cname,cdesc,cauthor,cuploadTime,ctid)
+		values(#{cname},#{cdesc},#{cauthor},#{cuploadtime},#{ctid})
+	</insert>
 </mapper>

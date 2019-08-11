@@ -17,7 +17,9 @@ public interface CourseService {
 	List<Course> selectCourseByCtid(int ctid);
 
 	List<Course> selectByCplayvolume();
+	public List<Course> SelectAllCourse();
 
+	public int addCourse(Course course);
 
 
 }
