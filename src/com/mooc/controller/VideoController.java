@@ -26,16 +26,13 @@ public class VideoController {
 	public List<Video> selectVidioByCid(int cid){
 		List<Video> list = 	videoService.selectVidioByCid(cid);		
 		videoService.insertPlayColum(cid);
-
 		return list;	
 	}
+	
 	@RequestMapping("/showVideoByvid.do")
 	@ResponseBody
 	public Video showVideoByvid(int vid){
 		Video video = 	videoService.showVideoByvid(vid);		
-		System.out.println("测试结果---------------------"+video.getVname());
-		System.out.println("测试结果---------------------"+video.getVaddress());
-
 		return video;	
 	}
 }
