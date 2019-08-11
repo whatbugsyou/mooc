@@ -25,7 +25,8 @@ public class UserController {
 	private UserService userService;
 	
 	@PostMapping("/login.do")
-	public @ResponseBody String login( User user,HttpServletRequest req) {
+	public @ResponseBody String login(User user,HttpServletRequest req) {
+		System.out.println("�ս�����Ʋ��"+user);
 		if(userService.login(user)) {
 			req.getSession().setAttribute("user", user);
 			return "ok";
@@ -44,9 +45,8 @@ public class UserController {
 	 */
 	@PostMapping("/enterPersonalCenter.do")
 	public @ResponseBody User enterPersonalCenter(HttpServletRequest request) {
-//		��session��ȡ����user��Ϣ
-//		request.getSession().getAttribute("user");
-		User user = userService.enterPersonalCenter();
+		//��session��ȡ����user��Ϣ
+		User user = (User)request.getSession().getAttribute("user");
 		System.out.println(user);
 		return user;
 	}
@@ -60,14 +60,9 @@ public class UserController {
 	 * @author ����
 	 */
 	@PostMapping("/changeSignature.do")
-	public @ResponseBody int changeSignature(String signature) {
-//		��session��ȡ����user��Ϣ
-//		request.getSession().getAttribute("user");	
-		User user = new User();
-		user.setUid(1);
-		user.setAccount("LWG");
-		user.setPassword("666666");
-		user.setPortrait("img/user-default/u1.jpg");
+	public @ResponseBody int changeSignature(String signature,HttpServletRequest request) {
+		//��session��ȡ����user��Ϣ
+		User user = (User)request.getSession().getAttribute("user");
 		user.setSignature(signature);
 		if(userService.changeUser(user)==1) {
 			return 1;
@@ -97,15 +92,10 @@ public class UserController {
 	 * @author ����
 	 */
 	@PostMapping("/changePortraitRandom.do")
-	public @ResponseBody int changePortraitRandom(String portrait) {
-//		��session��ȡ����user��Ϣ
-//		request.getSession().getAttribute("user");	
-		User user = new User();
-		user.setUid(1);
-		user.setAccount("LWG");
-		user.setPassword("666666");
+	public @ResponseBody int changePortraitRandom(String portrait,HttpServletRequest request) {
+		//��session��ȡ����user��Ϣ
+		User user = (User)request.getSession().getAttribute("user");
 		user.setPortrait(portrait);
-		user.setSignature("��ʤ��");
 		if(userService.changeUser(user)==1) {
 			return 1;
 		}else {
@@ -123,7 +113,7 @@ public class UserController {
 	 * @throws IllegalStateException 
 	 */
 	@PostMapping("/changePortraitUpload.do")
-	public @ResponseBody String changePortraitUpload(MultipartFile pictureFile) throws Exception {
+	public @ResponseBody String changePortraitUpload(MultipartFile pictureFile,HttpServletRequest request) throws Exception {
 		
 		// ��ȡͼƬԭʼ�ļ���
         String originalFilename = pictureFile.getOriginalFilename();
@@ -140,22 +130,20 @@ public class UserController {
         //�����д�ļ�
         pictureFile.transferTo(uploadPic);
         
-        User user = new User();
-		user.setUid(1);
-		user.setAccount("LWG");
-		user.setPassword("666666");
+        User user = (User)request.getSession().getAttribute("user");
 		user.setPortrait(path);
-		user.setSignature("��ʤ��");
 		int changeUser = userService.changeUser(user);
 		if(changeUser==1) {
 			return path;
 		}
-		return "img/user-default/u4.jpg";
+		return "error";
 	}
 	
 
 	@PostMapping("/register.do")
 	public @ResponseBody String register( User user) {
+		user.setPortrait("img/user-default/u1.jpg");
+		user.setSignature("��û�����ø���ǩ��");
 		if(userService.register(user)) {
 			return "ok";
 		}else {

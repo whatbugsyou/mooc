@@ -27,7 +27,6 @@ public interface UserMapper {
 	public int updateUser(User user);
 	
 	
-	
 	@Select("select * from user")
 	public List<User> selectAlluser();
 	
@@ -39,9 +38,4 @@ public interface UserMapper {
 	
 	@Select("select count(*) from user")
 	public int selectUserCount();
-	
-	//查询所有的用户
-		List<User> selectAllUser();
-		//根据id删除用户
-		int deleteUserById(int uid);
 }

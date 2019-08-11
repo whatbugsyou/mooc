@@ -2,6 +2,8 @@ package com.mooc.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,10 +24,10 @@ public class SubscribeController {
 	 * @author ����
 	 */
 	@PostMapping("/getMySubscribe.do")
-	public @ResponseBody List<Course> getMySubscribe() {
-//		��session��ȡ����user��Ϣ
-//		User user = request.getSession().getAttribute("user");	
-		List<Course> courseList = subscribeService.getSubscribeCourseList(1);
+	public @ResponseBody List<Course> getMySubscribe(HttpServletRequest request) {
+		//��session��ȡ����user��Ϣ
+		User user = (User) request.getSession().getAttribute("user");	
+		List<Course> courseList = subscribeService.getSubscribeCourseList(user.getUid());
 		System.out.println(courseList);
 		return courseList;
 	}
@@ -38,10 +40,10 @@ public class SubscribeController {
 	 * @author ����
 	 */
 	@PostMapping("/cancelSubscribeCourse.do")
-	public @ResponseBody int cancelSubscribeCourse(int cid) {
-//		��session��ȡ����user��Ϣ
-//		User user = request.getSession().getAttribute("user");	
-		if (subscribeService.cancelSubscribe(cid,1)==1) {
+	public @ResponseBody int cancelSubscribeCourse(int cid,HttpServletRequest request) {
+		//��session��ȡ����user��Ϣ
+		User user = (User) request.getSession().getAttribute("user");	
+		if (subscribeService.cancelSubscribe(cid,user.getUid())==1) {
 			return 1;
 		} else {
 			return 0;

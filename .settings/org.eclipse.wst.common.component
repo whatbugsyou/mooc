@@ -10,10 +10,17 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
                 
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/config"/>
+<<<<<<< HEAD
                 
         <property name="context-root" value="mooc"/>
         <property name="java-output-path" value="/mooc/build/classes"/>
                     
+=======
+        <property name="context-root" value="mooc"/>
+        <property name="java-output-path" value="/mooc/build/classes"/>
+            
+    </wb-module>
+>>>>>>> dfebb489020ad2f861a32b4b59636c1559c1a648
     
     </wb-module>
         

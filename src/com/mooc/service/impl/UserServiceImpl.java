@@ -15,11 +15,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean login(User user) {
-		// TODO Auto-generated method stub
 		User user2 = userMapper.selectUserByAccount(user.getAccount());
-		System.out.println("查出来的user2"+user2);
+		System.out.println("=====================");
+		System.out.println(user2);
 		if(user2!=null && user2.getPassword().equals(user.getPassword())) {
 			user.setUid(user2.getUid());
+			user.setPortrait(user2.getPortrait());
+			user.setSignature(user2.getSignature());
 			return true;
 		}
 		return false;
@@ -34,6 +36,7 @@ public class UserServiceImpl implements UserService {
 	public int changeUser(User user) {
 		return userMapper.updateUser(user);
 	}
+	
 	public boolean register(User user) {
 		User user2 = userMapper.selectUserByAccount(user.getAccount());
 		if(user2==null) {
