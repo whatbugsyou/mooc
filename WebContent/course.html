@@ -93,27 +93,26 @@
             //这是课程搜索，搜索猴展示
             $("#search-course").click(function(){        
                 $.get("http://localhost:8080/mooc/searchcourse.do?"+$("#form").serialize(),
-                		  function (res) {    
-            	    $(".moco-course-list").html("");
-  	              $.each(res, function (index, course) { 	          	        
-                 $(".moco-course-list").append("<div class='course-card-container'>"
-                 //整个视频区都是一个a标签，点击实现跳转，可在这个基础上集判断是否登录
-                +"<a target='_blank' href='http://localhost:8080/mooc/showvideo.do?cid="+course.cid+"' class='course-card'>"
-          +"<div class='course-card-top'>    <img class='course-banner lazy'"
-                +"style='display: inline;' src='img/html.jpg'>"
-             +"<div class='course-label'><label>"+"点击量："+course.cplayvolume+"</label></div></div>"
-              +" <div class='course-card-content'>"
-               +"<h3 class='course-card-name'>"+course.cname+"</h3> <div class='clearfix course-card-bottom'>"
-                +"<div class='course-card-info'> <span>作者："+course.cauthor+"</span> "
-                  +"</div> <p class='course-card-desc'>"+course.cdesc+"</p>"
-                        +"<div class='course-card-price'>"
-                       +"<div class='price-box'>"
-                    +"<span class='price'>免费</span>"
-                    +"<div class='collect clearfix js-course-collect' data-cmd='follow' data-cid='"+course.cid+"' title='收藏'>" 
-                     +"<i class='fa fa-star-o' aria-hidden='true'></i><span>收藏</span>"
-                     +" </div> </div> </div> </div> </div></a> </div>");
-             });
-         }
+                function (res) {    
+                    	    $(".moco-course-list").html("");
+          	              $.each(res, function (index, course) { 	          	        
+                         $(".moco-course-list").append("<div class='course-card-container'>"
+                        +"<a target='_blank' href='' onclick='userExist("+course.cid+")' class='course-card'>"
+                  +"<div class='course-card-top'>    <img class='course-banner lazy'"
+                        +"style='display: inline;' src='img/html.jpg'>"
+                     +"<div class='course-label'><label>"+"点击量："+course.cplayvolume+"</label></div></div>"
+                      +" <div class='course-card-content'>"
+                       +"<h3 class='course-card-name'>"+course.cname+"</h3> <div class='clearfix course-card-bottom'>"
+                        +"<div class='course-card-info'> <span>作者："+course.cauthor+"</span> "
+                          +"</div> <p class='course-card-desc'>"+course.cdesc+"</p>"
+                                +"<div class='course-card-price'>"
+                               +"<div class='price-box'>"
+                            +"<span class='price'>免费</span>"
+                            +"<div class='collect clearfix js-course-collect' data-cmd='follow' data-cid='"+course.cid+"' title='收藏'>" 
+                             +"<i class='fa fa-star-o' aria-hidden='true'></i><span>收藏</span>"
+                             +" </div> </div> </div> </div> </div></a> </div>");
+                     });
+                 }
                 );
             });
             //这是所有课程展示，默认按时间排序
@@ -124,7 +123,7 @@
                     	    $(".moco-course-list").html("");
           	              $.each(res, function (index, course) { 	          	        
                          $(".moco-course-list").append("<div class='course-card-container'>"
-                        +"<a target='_blank' href='http://localhost:8080/mooc/video.html?cid="+course.cid+"' class='course-card'>"
+                        +"<a target='_blank' href='' onclick='userExist("+course.cid+")' class='course-card'>"
                   +"<div class='course-card-top'>    <img class='course-banner lazy'"
                         +"style='display: inline;' src='img/html.jpg'>"
                      +"<div class='course-label'><label>"+"点击量："+course.cplayvolume+"</label></div></div>"
@@ -142,6 +141,16 @@
                  }
            );
          }
+         http://localhost:8080/mooc/video.html?cid="+course.cid+"
+         function userExist(cid){ 
+           if(nav_vm.user["account"]==""){
+                $(".course-card").attr({"target":"_self","href":"course.html"});
+                alert("您没有登录，请先登录");
+           }else{
+            $(".course-card").attr({"target":"_blank","href":"http://localhost:8080/mooc/video.html?cid="+cid});
+                
+           }
+         }
          //这是按热度排序展示
          function hot(){               
          		$.get("http://localhost:8080/mooc/hot.do",
@@ -150,7 +159,7 @@
                     	    $(".moco-course-list").html("");
           	              $.each(res, function (index, course) { 	          	        
                          $(".moco-course-list").append("<div class='course-card-container'>"
-                        +"<a target='_blank' href='http://localhost:8080/mooc/showvideo.do?cid="+course.cid+"' class='course-card'>"
+                        +"<a target='_blank' href='' onclick='userExist("+course.cid+")' class='course-card'>"
                   +"<div class='course-card-top'>    <img class='course-banner lazy'"
                         +"style='display: inline;' src='img/html.jpg'>"
                      +"<div class='course-label'><label>"+"点击量："+course.cplayvolume+"</label></div></div>"
@@ -192,11 +201,11 @@
 
             $.get("http://localhost:8080/mooc/selectCourseByType.do",{"ctid":ctid},
          		/* 	 $(".moco-course-list").html(""); */
-                       function (res) {    
+                 function (res) {    
                     	    $(".moco-course-list").html("");
           	              $.each(res, function (index, course) { 	          	        
                          $(".moco-course-list").append("<div class='course-card-container'>"
-                        +"<a target='_blank' href='http://localhost:8080/mooc/showvideo.do?cid="+course.cid+"' class='course-card'>"
+                        +"<a target='_blank' href='' onclick='userExist("+course.cid+")' class='course-card'>"
                   +"<div class='course-card-top'>    <img class='course-banner lazy'"
                         +"style='display: inline;' src='img/html.jpg'>"
                      +"<div class='course-label'><label>"+"点击量："+course.cplayvolume+"</label></div></div>"
