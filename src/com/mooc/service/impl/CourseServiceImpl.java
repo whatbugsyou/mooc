@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.mooc.dao.CourseMapper;
 import com.mooc.entity.Course;
 import com.mooc.entity.Coursetype;
+import com.mooc.entity.Video;
 import com.mooc.service.CourseService;
 @Service
 public class CourseServiceImpl implements CourseService{
@@ -49,6 +50,8 @@ public class CourseServiceImpl implements CourseService{
 		List<Course> list =courseMapper.selectCourseByCtid(ctid);
 		return list;
 	}
+
+
 
 
 }

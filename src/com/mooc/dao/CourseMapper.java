@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.mooc.entity.Course;
 import com.mooc.entity.Coursetype;
+import com.mooc.entity.Video;
 
 @Repository
 public interface CourseMapper {
@@ -20,5 +21,7 @@ public interface CourseMapper {
 	List<Course> selectCourseByCtid(int ctid);
 
 	List<Course> selectByCplayvolume();
+
+
 
 }

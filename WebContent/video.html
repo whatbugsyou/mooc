@@ -55,48 +55,8 @@
 					<div class="scroll_wrap">
 						<div class="scroll_cont">     
 							<!--单个视频-->                           
-							<div class="menu-selection">
-								<a href="#"> 
-									<img src="img/test1.jpg">
-									<div class="video-name">这里填视频名至于填什么我也不知道</div>
-									<div class="video-episode">第x集</div>
-								</a>                          
-							</div>
-							<div class="menu-selection">
-								<a href="#"> 
-									<img src="img/test1.jpg">
-									<div class="video-name">这里填视频名至于填什么我也不知道</div>
-									<div class="video-episode">第x集</div>
-								</a>                          
-							</div>
-							<div class="menu-selection">
-								<a href="#"> 
-									<img src="img/test1.jpg">
-									<div class="video-name">这里填视频名至于填什么我也不知道</div>
-									<div class="video-episode">第x集</div>
-								</a>                          
-							</div>
-							<div class="menu-selection">
-								<a href="#"> 
-									<img src="img/test1.jpg">
-									<div class="video-name">这里填视频名至于填什么我也不知道</div>
-									<div class="video-episode">第x集</div>
-								</a>                          
-							</div>   
-							<div class="menu-selection">
-								<a href="#"> 
-									<img src="img/test1.jpg">
-									<div class="video-name">这里填视频名至于填什么我也不知道</div>
-									<div class="video-episode">第x集</div>
-								</a>                          
-							</div>
-							<div class="menu-selection">
-								<a href="#"> 
-									<img src="img/test1.jpg">
-									<div class="video-name">这里填视频名至于填什么我也不知道</div>
-									<div class="video-episode">第x集</div>
-								</a>                          
-							</div>
+						
+
 						</div>
 				
 						<div class="scroll_bar">
@@ -129,12 +89,47 @@
 	</div>
 </div>
 
-	<script>
+	<script type="text/javascript">
 			$(function(){
 			  $("#head-nav").load("navbar.html");
-			})
-	  </script>
-	<script type="text/javascript">
+				 showvedio();
+			});
+
+			  function getQueryString(name){
+				     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+				     var r = window.location.search.substr(1).match(reg);
+				     if(r!=null)return  unescape(r[2]); return null;
+				}
+		//接收从控制层传来的视频集合videolist
+		function showvedio(){
+	          $.get("http://localhost:8080/mooc/showvideo.do",{"cid":getQueryString("cid")},
+	                 function (res) {    
+	                    	    $(".scroll_wrap").html("");							
+								// 
+							
+								 $.each(res, function (index, video) { 		
+								 if(index==0){
+									$("#myVideo").attr('src',video.vaddress);
+								 }
+								 $(".scroll_wrap").append("<div class='menu-selection'>"
+								 +"<a href='javascript:void(0);' onclick='showVideoByvid("+video.vid+")'> "
+								 +"<img src='img/test1.jpg'>"
+								 +"<div class='video-name'>"+video.vname+"</div>"
+								 +"<div class='video-episode'>第"+video.vepisode+"集</div></a></div>");
+	                    	 });
+	                 }
+	           ); 
+		}
+		
+		function showVideoByvid(vid){
+	          $.get("http://localhost:8080/mooc/showVideoByvid.do",{"vid":vid},
+	                 function (res) {    
+								$("#myVideo").attr('src',res.vaddress);					
+	                    	 });
+	                 }
+	
+
+	
 		//获取视频对象 H5写法
 		var myVideo = document.querySelector("#myVideo");
  
